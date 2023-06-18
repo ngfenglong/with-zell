@@ -294,7 +294,7 @@ const Header = () => {
               className="order-last mt-[calc(theme(spacing.16)-theme(spacing.3))]"
             />
             <Container
-              className="top- order-last -mb-3 pt-3"
+              className="top-0 order-last -mb-3 pt-3"
               style={{ position: 'var(--header-position)' }}
             >
               <div
