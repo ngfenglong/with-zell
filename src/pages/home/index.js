@@ -18,7 +18,7 @@ const HomePage = () => {
 
   return (
     <>
-      <Container className="mt-9">
+      <Container className="mt-8">
         <PageIntro
           title="Software Developer, Dance Enthusiast, and Lifelong Learner."
           intro={`I'm Zell, a software developer based in Singapore who believes in
