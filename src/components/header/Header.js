@@ -205,7 +205,6 @@ const Header = () => {
       if (isInitial.current) {
         setProperty('--header-position', 'sticky');
       }
-
       setProperty('--content-offset', `${downDelay}px`);
 
       if (isInitial.current || scrollY < downDelay) {

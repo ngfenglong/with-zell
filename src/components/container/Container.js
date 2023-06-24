@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 
-export const OuterContainer = ( {className, ...props} ) => {
+export const OuterContainer = ({ className, ...props }) => {
   return (
     <div className={clsx('sm:px-8', className)}>
       <div className="mx-auto max-w-7xl lg:px-8">{props.children}</div>
@@ -16,10 +16,12 @@ export const InnerContainer = ({ className, ...props }) => {
   );
 };
 
-export const Container = ({ children, props }) => {
-  return <OuterContainer {...props}>
-    <InnerContainer>{children}</InnerContainer>
-  </OuterContainer>;
+export const Container = ({ children, ...props }) => {
+  return (
+    <OuterContainer {...props}>
+      <InnerContainer>{children}</InnerContainer>
+    </OuterContainer>
+  );
 };
 
 export default Container;
