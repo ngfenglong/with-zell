@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import Container from '../../components/container/Container';
-import PageIntro from '../../components/page-intro/PageIntro';
 import SocialLink from '../../components/social-link/SocialLink';
 import {
   GitHubIcon,
