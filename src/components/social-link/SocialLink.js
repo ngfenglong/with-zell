@@ -1,9 +1,13 @@
 import { Link } from 'react-router-dom';
 
-const SocialLink = ({ icon: Icon, ...props }) => {
+const SocialLink = ({ icon: Icon, children, ...props }) => {
   return (
-    <Link className="group -m-1 p-1" {...props}>
-      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600 dark:fill-zinc-400" />
+    <Link
+      className="group flex text-sm font-medium text-zinc-800 transition hover:text-teal-500"
+      {...props}
+    >
+      <Icon className="h-6 w-6 fill-zinc-500 transition group-hover:fill-zinc-600" />
+      <span className="ml-4">{children}</span>
     </Link>
   );
 };

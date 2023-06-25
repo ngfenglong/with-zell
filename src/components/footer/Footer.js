@@ -10,6 +10,7 @@ const Footer = () => {
           <InnerContainer>
             <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
               <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-zinc-800">
+                <Link to={ROUTES.HOME}>Home</Link>
                 <Link to={ROUTES.ABOUT}>About</Link>
                 <Link to={ROUTES.PROJECTS}>Projects</Link>
                 <Link to={ROUTES.BLOG}>Blog</Link>

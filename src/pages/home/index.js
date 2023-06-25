@@ -21,7 +21,7 @@ const HomePage = () => {
       <Container className="mt-8">
         <PageIntro
           title="Software Developer, Dance Enthusiast, and Lifelong Learner."
-          intro={`I'm Zell, a software developer based in Singapore who believes in
+          intro={`I'm Zell (Feng Long), a software developer based in Singapore who believes in
             constant learning and growth. My journey has been marked by a focus
             on application development, all the while exploring the endless
             possibilities that new technology brings. Beyond my professional
@@ -30,14 +30,9 @@ const HomePage = () => {
         >
           <div className="mt-6 flex gap-6">
             <SocialLink
-              to="https://twitter.com/Zell_Dev"
-              aria-label="Follow on Twitter"
-              icon={TwitterIcon}
-            />
-            <SocialLink
-              to="https://www.instagram.com/zell1995/"
-              aria-label="Follow on Instagram"
-              icon={InstagramIcon}
+              to="https://www.linkedin.com/in/ngfenglong/"
+              aria-label="Follow on LinkedIn"
+              icon={LinkedInIcon}
             />
             <SocialLink
               to="https://github.com/ngfenglong/"
@@ -45,11 +40,15 @@ const HomePage = () => {
               icon={GitHubIcon}
             />
             <SocialLink
-              to="https://www.linkedin.com/in/ngfenglong/"
-              aria-label="Follow on LinkedIn"
-              icon={LinkedInIcon}
+              to="https://www.instagram.com/zell1995/"
+              aria-label="Follow on Instagram"
+              icon={InstagramIcon}
             />
-
+            <SocialLink
+              to="https://twitter.com/Zell_Dev"
+              aria-label="Follow on Twitter"
+              icon={TwitterIcon}
+            />
             <SocialLink
               to="https://leetcode.com/zell1502/"
               aria-label="Follow on Leetcode"

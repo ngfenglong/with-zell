@@ -6,11 +6,11 @@ export const PROJECTS_DETAILS = [
     description:
       'An interactive app helping users discover and plan activities around food, games, and entertainment. Users can add and access unique places.',
     technology: ['React-typescript,', 'Go lang', 'MySQL'],
-    link: { href: 'https://ikou-web.netlify.app/', label: 'Ikou-Web' },
+    link: { href: 'https://ikou-web.netlify.app/', label: 'ikou-web.netlify.app' },
     github: [
       {
         href: 'https://github.com/ngfenglong/ikou-website',
-        label: 'Ikou-frontend-github-repo',
+        label: 'github.com/ngfenglong/ikou-website',
       },
       {
         href: 'https://github.com/ngfenglong/Ikou-backend',
@@ -26,7 +26,7 @@ export const PROJECTS_DETAILS = [
     technology: ['React-typescript,', 'NodeJS', 'MongoDB'],
     link: {
       href: 'https://trade-tracker.netlify.app/',
-      label: 'Trade Tracker',
+      label: 'trade-tracker.netlify.app',
     },
     github: [
       {
@@ -43,7 +43,7 @@ export const PROJECTS_DETAILS = [
     technology: ['React,', 'Go lang', 'MySQL'],
     link: {
       href: 'https://makan-place-randomizer.netlify.app/',
-      label: 'Time To Makan',
+      label: 'makan-place-randomizer.netlify.app',
     },
     github: [],
     logo: TTM_LOGO,

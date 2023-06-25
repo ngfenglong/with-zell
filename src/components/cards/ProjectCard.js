@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { LinkIcon } from '@heroicons/react/20/solid';
+import { GlobeAltIcon } from '@heroicons/react/20/solid';
 import { GitHubIcon } from '../social-link/Icons';
 
 const ProjectCard = ({ project }) => {
@@ -19,7 +19,7 @@ const ProjectCard = ({ project }) => {
       <p className="relative z-10 mt-6 flex flex-col gap-1 text-sm font-medium text-zinc-400 transition">
         {project.link && (
           <Link className="flex flex-row items-center" to={project.link.href}>
-            <LinkIcon className="h-6 w-6 flex-none" />
+            <GlobeAltIcon className="h-6 w-6 flex-none" />
             <span className="ml-2">{project.link.label}</span>
           </Link>
         )}
