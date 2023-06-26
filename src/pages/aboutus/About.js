@@ -31,49 +31,50 @@ const AboutPage = () => {
           </div>
           <div className="lg:order-first lg:row-span-2">
             <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl">
-              I'm Zell(Feng Long). Software Developer, Dance Enthusiast, and
+              I'm Zell (Feng Long), from Singapore - Technologist, Dancer, and
               Lifelong Learner.
             </h1>
             <div className="mt-6 space-y-7 text-base text-zinc-600">
               <p>
-                I'm a software developer based in Singapore who believes in
-                constant learning and growth. My journey has been marked by a
-                focus on application development, all the while exploring the
-                endless possibilities that new technology brings. Beyond my
-                professional work, I find joy in street dance, problem-solving,
-                and the essence of computer science theory intrigues me.
+                My journey into the world of technology started at the age of 16,
+                when a friend introduced me to HTML and CSS. This was my first
+                taste of the transformative power of coding, and I was instantly
+                hooked. While pursuing a diploma in Business Informatics at Nanyang
+                Polytechnic, I discovered the synergies between business and
+                technology, kindling a passion for managing and enhancing
+                projects.
               </p>
               <p>
-                I'm a software developer based in Singapore who believes in
-                constant learning and growth. My journey has been marked by a
-                focus on application development, all the while exploring the
-                endless possibilities that new technology brings. Beyond my
-                professional work, I find joy in street dance, problem-solving,
-                and the essence of computer science theory intrigues me.
+                However, as I pursued my degree in Information Systems at the National
+                University of Singapore, my desire to work more hands-on with
+                technology was rekindled, leading me down the path of a software
+                developer.
               </p>
               <p>
-                I'm a software developer based in Singapore who believes in
-                constant learning and growth. My journey has been marked by a
-                focus on application development, all the while exploring the
-                endless possibilities that new technology brings. Beyond my
-                professional work, I find joy in street dance, problem-solving,
-                and the essence of computer science theory intrigues me.
+                I truly enjoy the intricate blend of technology, creativity, and
+                craftsmanship that software development offers. There's always
+                a new puzzle to solve, a new concept to grasp, and new
+                technologies to connect. The dynamic nature of this tech world
+                keeps me on my toes, constantly sparking my curiosity and
+                driving my passion for continuous learning.
               </p>
               <p>
-                I'm a software developer based in Singapore who believes in
-                constant learning and growth. My journey has been marked by a
-                focus on application development, all the while exploring the
-                endless possibilities that new technology brings. Beyond my
-                professional work, I find joy in street dance, problem-solving,
-                and the essence of computer science theory intrigues me.
+                Beyond the sphere of technology, dance has been a crucial part
+                of my life since my polytechnic days. From Popping and Hip Hop
+                to learning Breaking, dance brings balance to my life, reminding
+                me of the beauty of rhythm and movement. Alongside dance, my
+                love for cats, fascination with Japanese culture, and a growing
+                appreciation for the Japanese language all contribute to my
+                diverse range of interests.
               </p>
               <p>
-                I'm a software developer based in Singapore who believes in
-                constant learning and growth. My journey has been marked by a
-                focus on application development, all the while exploring the
-                endless possibilities that new technology brings. Beyond my
-                professional work, I find joy in street dance, problem-solving,
-                and the essence of computer science theory intrigues me.
+                I started this blog from my belief in the value of shared
+                knowledge. As I navigate through my own tech journey, my goal is
+                to document my experiences and share what I've learned, in the
+                hope that it might help someone else out there. Whether you're
+                interested in tech, dance, or just sharing interesting thoughts,
+                I'm always open to making new friends. Let's learn and grow
+                together in this incredible journey of life.
               </p>
             </div>
           </div>
