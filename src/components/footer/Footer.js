@@ -15,7 +15,6 @@ const Footer = () => {
                 <Link to={ROUTES.PROJECTS}>Projects</Link>
                 <Link to={ROUTES.BLOG}>Blog</Link>
                 <Link to={ROUTES.RESOURCES}>Resources</Link>
-                <Link to={ROUTES.CONTACT}>Contact</Link>
               </div>
               <p className="text-sm text-zinc-400">
                 &copy; {new Date().getFullYear()} With Zell. All rights

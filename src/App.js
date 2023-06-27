@@ -8,7 +8,6 @@ import ProjectsPage from './pages/projects/Projects';
 import AboutPage from './pages/aboutus/About';
 import BlogPage from './pages/blog/Blog';
 import ResourcesPage from './pages/resources/Resources';
-import ContactPage from './pages/contact/Contact';
 
 function App() {
   return (
@@ -20,7 +19,6 @@ function App() {
           <Route path={ROUTES.PROJECTS} element={<ProjectsPage />} />
           <Route path={ROUTES.BLOG} element={<BlogPage />} />
           <Route path={ROUTES.RESOURCES} element={<ResourcesPage />} />
-          <Route path={ROUTES.CONTACT} element={<ContactPage />} />
         </Route>
       </Routes>
     </BrowserRouter>
