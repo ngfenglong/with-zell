@@ -7,6 +7,7 @@ import clsx from 'clsx';
 import * as ROUTES from '../../constants/routes';
 import Container from '../container/Container';
 import { AVATAR_PICTURE } from '../../constants/assets';
+import Image from 'next/image';
 
 function CloseIcon(props) {
   return (
@@ -162,7 +163,7 @@ function Avatar({ large = false, className, ...props }) {
       className={clsx(className, 'pointer-events-auto')}
       {...props}
     >
-      <img
+    <Image
         src={AVATAR_PICTURE}
         alt=""
         sizes={large ? '4rem' : '2.25rem'}
