@@ -1,6 +1,6 @@
-import { Link } from 'react-router-dom';
+import Link from 'next/link';
 import { OuterContainer, InnerContainer } from '../container/Container';
-import * as ROUTES from './../../constants/routes';
+import * as ROUTES from '../../constants/routes';
 
 const Footer = () => {
   return (
@@ -10,11 +10,11 @@ const Footer = () => {
           <InnerContainer>
             <div className="flex flex-col items-center justify-between gap-6 sm:flex-row">
               <div className="flex flex-wrap justify-center gap-x-6 gap-y-1 text-sm font-medium text-zinc-800">
-                <Link to={ROUTES.HOME}>Home</Link>
-                <Link to={ROUTES.ABOUT}>About</Link>
-                <Link to={ROUTES.PROJECTS}>Projects</Link>
-                <Link to={ROUTES.BLOG}>Blog</Link>
-                <Link to={ROUTES.RESOURCES}>Resources</Link>
+                <Link href={ROUTES.HOME}>Home</Link>
+                <Link href={ROUTES.ABOUT}>About</Link>
+                <Link href={ROUTES.PROJECTS}>Projects</Link>
+                <Link href={ROUTES.BLOG}>Blog</Link>
+                <Link href={ROUTES.RESOURCES}>Resources</Link>
               </div>
               <p className="text-sm text-zinc-400">
                 &copy; {new Date().getFullYear()} With Zell. All rights

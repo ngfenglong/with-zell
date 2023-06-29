@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
-import Container from '../../components/container/Container';
-import SocialLink from '../../components/social-link/SocialLink';
+import Container from '../components/container/Container';
+import SocialLink from '../components/social-link/SocialLink';
 import {
   GitHubIcon,
   InstagramIcon,
   LeetCodeIcon,
   LinkedInIcon,
   TwitterIcon,
-} from '../../components/social-link/Icons';
-import PageIntro from '../../components/page-intro/PageIntro';
+} from '../components/social-link/Icons';
+import PageIntro from '../components/page-intro/PageIntro';
 
 const HomePage = () => {
   useEffect(() => {
@@ -30,27 +30,27 @@ const HomePage = () => {
         >
           <div className="mt-6 flex gap-6">
             <SocialLink
-              to="https://www.linkedin.com/in/ngfenglong/"
+              href="https://www.linkedin.com/in/ngfenglong/"
               aria-label="Follow on LinkedIn"
               icon={LinkedInIcon}
             />
             <SocialLink
-              to="https://github.com/ngfenglong/"
+              href="https://github.com/ngfenglong/"
               aria-label="Follow on GitHub"
               icon={GitHubIcon}
             />
             <SocialLink
-              to="https://www.instagram.com/zell1995/"
+              href="https://www.instagram.com/zell1995/"
               aria-label="Follow on Instagram"
               icon={InstagramIcon}
             />
             <SocialLink
-              to="https://twitter.com/Zell_Dev"
+              href="https://twitter.com/Zell_Dev"
               aria-label="Follow on Twitter"
               icon={TwitterIcon}
             />
             <SocialLink
-              to="https://leetcode.com/zell1502/"
+              href="https://leetcode.com/zell1502/"
               aria-label="Follow on Leetcode"
               icon={LeetCodeIcon}
             />

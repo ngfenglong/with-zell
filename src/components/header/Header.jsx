@@ -1,9 +1,10 @@
 import { Fragment, useEffect, useRef } from 'react';
 import { Popover, Transition } from '@headlessui/react';
-import { Link, useLocation } from 'react-router-dom';
+import  Link  from 'next/link';
+import { useRouter } from 'next/router';
 import clsx from 'clsx';
 
-import * as ROUTES from './../../constants/routes';
+import * as ROUTES from '../../constants/routes';
 import Container from '../container/Container';
 import { AVATAR_PICTURE } from '../../constants/assets';
 
@@ -36,10 +37,10 @@ function ChevronDownIcon(props) {
   );
 }
 
-function MobileNavItem({ to, children }) {
+function MobileNavItem({ href, children }) {
   return (
     <li>
-      <Popover.Button as={Link} to={to} className="block py-2">
+      <Popover.Button as={Link} href={href} className="block py-2">
         {children}
       </Popover.Button>
     </li>
@@ -86,11 +87,11 @@ function MobileNavigation(props) {
             </div>
             <nav className="mt-6">
               <ul className="-my-2 divide-y divide-zinc-100 text-base text-zinc-800">
-                <MobileNavItem to={ROUTES.HOME}>Home</MobileNavItem>
-                <MobileNavItem to={ROUTES.ABOUT}>About</MobileNavItem>
-                <MobileNavItem to={ROUTES.PROJECTS}>Projects</MobileNavItem>
-                <MobileNavItem to={ROUTES.BLOG}>Blog</MobileNavItem>
-                <MobileNavItem to={ROUTES.RESOURCES}>Resources</MobileNavItem>
+                <MobileNavItem href={ROUTES.HOME}>Home</MobileNavItem>
+                <MobileNavItem href={ROUTES.ABOUT}>About</MobileNavItem>
+                <MobileNavItem href={ROUTES.PROJECTS}>Projects</MobileNavItem>
+                <MobileNavItem href={ROUTES.BLOG}>Blog</MobileNavItem>
+                <MobileNavItem href={ROUTES.RESOURCES}>Resources</MobileNavItem>
               </ul>
             </nav>
           </Popover.Panel>
@@ -100,13 +101,13 @@ function MobileNavigation(props) {
   );
 }
 
-function NavItem({ to, children }) {
-  let isActive = useLocation().pathname === to;
+function NavItem({ href, children }) {
+  let isActive = useRouter().pathname === href;
 
   return (
     <li>
       <Link
-        to={to}
+        href={href}
         className={clsx(
           'relative block px-3 py-2 transition',
           isActive ? 'text-teal-500 ' : 'hover:text-teal-500'
@@ -125,11 +126,11 @@ function DesktopNavigation(props) {
   return (
     <nav {...props}>
       <ul className="flex rounded-full bg-white/90 px-3 text-sm font-medium text-zinc-800 shadow-lg shadow-zinc-800/5 ring-1 ring-zinc-900/5 backdrop-blur">
-        <NavItem to={ROUTES.HOME}>Home</NavItem>
-        <NavItem to={ROUTES.ABOUT}>About</NavItem>
-        <NavItem to={ROUTES.PROJECTS}>Projects</NavItem>
-        <NavItem to={ROUTES.BLOG}>Blog</NavItem>
-        <NavItem to={ROUTES.RESOURCES}>Resources</NavItem>
+        <NavItem href={ROUTES.HOME}>Home</NavItem>
+        <NavItem href={ROUTES.ABOUT}>About</NavItem>
+        <NavItem href={ROUTES.PROJECTS}>Projects</NavItem>
+        <NavItem href={ROUTES.BLOG}>Blog</NavItem>
+        <NavItem href={ROUTES.RESOURCES}>Resources</NavItem>
       </ul>
     </nav>
   );
@@ -156,7 +157,7 @@ function AvatarContainer({ className, ...props }) {
 function Avatar({ large = false, className, ...props }) {
   return (
     <Link
-      to="/"
+    href="/"
       aria-label="Home"
       className={clsx(className, 'pointer-events-auto')}
       {...props}
@@ -176,7 +177,7 @@ function Avatar({ large = false, className, ...props }) {
 }
 
 const Header = () => {
-  let isHomePage = useLocation().pathname === ROUTES.HOME;
+  let isHomePage = useRouter().pathname === ROUTES.HOME;
 
   let headerRef = useRef();
   let avatarRef = useRef();

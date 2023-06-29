@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import Link  from 'next/link';
 
 const SocialLink = ({ icon: Icon, children, ...props }) => {
   return (
