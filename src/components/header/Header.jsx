@@ -176,7 +176,7 @@ function Avatar({ large = false, className, ...props }) {
         loading="eager"
       />
     </Link>
-  );
+);
 }
 
 const Header = () => {
