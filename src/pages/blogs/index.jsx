@@ -1,15 +1,27 @@
-import {  useState } from 'react';
+import { useEffect, useState } from 'react';
 import Container from '../../components/container/Container';
 import { Client } from '@notionhq/client';
 import PageIntro from '@/components/page-intro/PageIntro';
 import ArticleCard from '@/components/cards/ArticleCard';
+import { MapNotionArticleToPost } from '@/services/ArticleMapper';
 
 const BlogPage = ({ articlesProp }) => {
-  const [articles, setArticles] = useState(articlesProp ?? []);
-  console.log(
-    'articles',
-    articlesProp.map((a) => console.log(a))
-  );
+  const [articles, setArticles] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const mappedArticles = articlesProp
+      .map((article) => MapNotionArticleToPost(article))
+      .sort((a, b) => {
+        return b.posted_date - a.posted_date;
+      });
+    setArticles(mappedArticles);
+    setIsLoading(false);
+  }, [articlesProp]);
+
+  if (isLoading) {
+  }
+
   return (
     <>
       <Container className="mt-16 sm:mt-32">
@@ -30,8 +42,8 @@ const BlogPage = ({ articlesProp }) => {
 };
 
 export async function getStaticProps() {
-  const notionDatabaseId = process.env.REACT_APP_NOTION_DATABASE;
-  const notionSecret = process.env.REACT_APP_NOTION_API_KEY;
+  const notionDatabaseId = process.env.NOTION_DATABASE;
+  const notionSecret = process.env.NOTION_API_KEY;
 
   if (!notionDatabaseId || !notionSecret) {
     return {
@@ -46,8 +58,8 @@ export async function getStaticProps() {
   const query = await notion.databases.query({
     database_id: notionDatabaseId,
     // sort by the most recently created posts
-    sorts: [{ property: 'Created', direction: 'descending' }],
-    filter: { property: 'Public', checkbox: { equals: true } },
+    sorts: [{ property: 'created', direction: 'descending' }],
+    filter: { property: 'public', checkbox: { equals: true } },
   });
 
   return {

@@ -1,35 +1,25 @@
-import { formatDate } from '@/util/date-helper';
+import { formatDate, formatDateToString } from '@/util/date-helper';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import Link from 'next/link';
 
 const ArticleCard = ({ article }) => {
-  console.log(article);
-  const { href } = article;
   return (
     <>
       <article className="md:grid md:grid-cols-4 md:items-baseline">
         <div className="group relative flex flex-col items-start md:col-span-3">
           {/* Title */}
           <h2 className="text-base font-semibold tracking-tight text-zinc-800 ">
-            {href ? (
-              <ArticleCardLink href="#">article title</ArticleCardLink>
-            ) : (
-              <span>article title</span>
-            )}
+            <ArticleCardLink href={`/blogs/${article.id}`}>
+              {article.title}
+            </ArticleCardLink>
           </h2>
           <ArticleTimeline dateTime={new Date()} className="md:hidden" decorate>
-            {formatDate(new Date())}
+            {formatDateToString(article.posted_date)}
           </ArticleTimeline>
           {/* Description */}
           <p className="relative z-10 mt-2 text-sm text-zinc-600">
-            Ungues fistula annoso, ille addit linoque motatque uberior verso
-            rubuerunt confine desuetaque. Sanguine anteit emerguntque
-            expugnacior est pennas iniqui ecce haeret genus: peiora imagine
-            fossas Cephisos formosa! Refugitque amata refelli supplex. Summa
-            brevis vetuere tenebas, hostes vetantis, suppressit, arreptum regna.
-            Postquam conpescit iuvenis habet corpus, et erratica, perdere, tot
-            mota ars talis.
+            {article.description}
           </p>
           <div
             aria-hidden="true"
@@ -40,7 +30,7 @@ const ArticleCard = ({ article }) => {
           </div>
         </div>
         <ArticleTimeline dateTime={new Date()} className="mt-1 hidden md:block">
-          {formatDate(new Date())}
+          {formatDateToString(article.posted_date)}
         </ArticleTimeline>
       </article>
     </>
