@@ -37,6 +37,7 @@ const getValueFromData = (notionProperty) => {
     case 'files':
       return notionProperty[notionProperty.type];
     case 'rich_text':
+      return notionProperty[notionProperty.type][0].plain_text;
     default:
       return null;
   }
