@@ -14,7 +14,7 @@ const PictureGallery = ({ pictures }) => {
       <div className="-my-4 flex justify-center gap-5 overflow-hidden py-4 sm:gap-8">
         {pictures.map((image, imageIndex) => (
           <div
-            key={image.src}
+            key={image}
             className={`relative aspect-[9/10] w-44 flex-none overflow-hidden rounded-xl bg-zinc-100 sm:w-72 sm:rounded-2xl ${
               rotations[imageIndex % rotations.length]
             }`}
