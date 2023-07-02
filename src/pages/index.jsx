@@ -21,7 +21,7 @@ const HomePage = ({ articlesProp }) => {
   const [articles, setArticles] = useState([]);
   useEffect(() => {
     document.title =
-      'Zell - Software Developer, Dance Enthusiast, and Lifelong Learner';
+      'WithZell - Software Developer, Dance Enthusiast, and Lifelong Learner';
 
     const mappedArticles = articlesProp
       .map((article) => MapNotionArticleToPost(article))
@@ -35,7 +35,7 @@ const HomePage = ({ articlesProp }) => {
     <>
       <Container className="mt-8">
         <PageIntro
-          title="Software Developer, Dance Enthusiast, and Lifelong Learner."
+          title="Software Developer, Dancer, and Lifelong Learner."
           intro={`I'm Zell (Feng Long), a software developer based in Singapore who believes in
             constant learning and growth. My journey has been marked by a focus
             on application development, all the while exploring the endless

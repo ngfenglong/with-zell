@@ -8,7 +8,7 @@ const PROJECTS = PROJECTS_DETAILS;
 
 const ProjectsPage = () => {
   useEffect(() => {
-    document.title = 'Zell - Discover My Projects in Progress';
+    document.title = 'WithZell - My Development Projects';
   }, []);
   return (
     <>

@@ -10,7 +10,7 @@ const BlogPage = ({ articlesProp }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    document.title = 'Zell - Tech & Life Insights';
+    document.title = 'WithZell - Tech & Life Insights';
 
     const mappedArticles = articlesProp
       .map((article) => MapNotionArticleToPost(article))

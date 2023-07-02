@@ -14,7 +14,7 @@ import Image from 'next/image';
 
 const AboutPage = () => {
   useEffect(() => {
-    document.title = 'Zell -- Technologist, Dancer, and Lifelong Learner';
+    document.title = 'WithZell - Technologist, Dancer, and Lifelong Learner';
   }, []);
   return (
     <>
@@ -33,9 +33,8 @@ const AboutPage = () => {
             </div>
           </div>
           <div className="lg:order-first lg:row-span-2">
-            <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-5xl">
-              I&apos;m Zell (Feng Long), from Singapore - Technologist, Dancer, and
-              Lifelong Learner.
+            <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-2xl">
+              I&apos;m Zell (Feng Long), from Singapore.
             </h1>
             <div className="mt-6 space-y-7 text-base text-zinc-600">
               <p>
@@ -55,8 +54,8 @@ const AboutPage = () => {
               </p>
               <p>
                 I truly enjoy the intricate blend of technology, creativity, and
-                craftsmanship that software development offers. There&apos;s always a
-                new puzzle to solve, a new concept to grasp, and new
+                craftsmanship that software development offers. There&apos;s
+                always a new puzzle to solve, a new concept to grasp, and new
                 technologies to connect. The dynamic nature of this tech world
                 keeps me on my toes, constantly sparking my curiosity and
                 driving my passion for continuous learning.
@@ -73,29 +72,45 @@ const AboutPage = () => {
               <p>
                 I started this blog from my belief in the value of shared
                 knowledge. As I navigate through my own tech journey, my goal is
-                to document my experiences and share what I&apos;ve learned, in the
-                hope that it might help someone else out there. Whether you&apos;re
-                interested in tech, dance, or just sharing interesting thoughts,
-                I&apos;m always open to making new friends. Let&apos;s learn and grow
-                together in this incredible journey of life.
+                to document my experiences and share what I&apos;ve learned, in
+                the hope that it might help someone else out there. Whether
+                you&apos;re interested in tech, dance, or just sharing
+                interesting thoughts, I&apos;m always open to making new
+                friends. Let&apos;s learn and grow together in this incredible
+                journey of life.
               </p>
             </div>
           </div>
           <div className="lg:pl-20">
             <div className="flex flex-col gap-4" role="list">
-              <SocialLink href="#" icon={LinkedInIcon}>
+              <SocialLink
+                href="https://www.linkedin.com/in/ngfenglong/"
+                icon={LinkedInIcon}
+              >
                 Follow on LinkedIn
               </SocialLink>
-              <SocialLink href="#" icon={GitHubIcon}>
+              <SocialLink
+                href="https://github.com/ngfenglong/"
+                icon={GitHubIcon}
+              >
                 Follow on GitHub
               </SocialLink>
-              <SocialLink href="#" icon={InstagramIcon}>
+              <SocialLink
+                href="https://www.instagram.com/tech.withzell/"
+                icon={InstagramIcon}
+              >
                 Follow on Instagram
               </SocialLink>
-              <SocialLink href="#" icon={TwitterIcon}>
+              <SocialLink
+                href="https://twitter.com/Zell_Dev"
+                icon={TwitterIcon}
+              >
                 Follow on Twitter
               </SocialLink>
-              <SocialLink href="#" icon={LeetCodeIcon}>
+              <SocialLink
+                href="https://leetcode.com/zell1502/"
+                icon={LeetCodeIcon}
+              >
                 Follow on Leetcode
               </SocialLink>
               <hr className="text-zinc-100" />
