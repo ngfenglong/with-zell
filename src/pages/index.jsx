@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Container from '../components/container/Container';
 import SocialLink from '../components/social-link/SocialLink';
 import {
@@ -9,12 +9,27 @@ import {
   TwitterIcon,
 } from '../components/social-link/Icons';
 import PageIntro from '../components/page-intro/PageIntro';
+import { ArticleCard } from '@/components/cards/ArticleCard';
+import { Client } from '@notionhq/client';
+import { MapNotionArticleToPost } from '@/services/ArticleMapper';
+import { RESUME_DETAILS } from '@/constants/resume-details';
+import ResumeCard from '@/components/cards/ResumeCard';
 
-const HomePage = () => {
+const RESUME = RESUME_DETAILS;
+
+const HomePage = ({ articlesProp }) => {
+  const [articles, setArticles] = useState([]);
   useEffect(() => {
     document.title =
       'Zell - Software Developer, Dance Enthusiast, and Lifelong Learner';
-  }, []);
+
+    const mappedArticles = articlesProp
+      .map((article) => MapNotionArticleToPost(article))
+      .sort((a, b) => {
+        return b.posted_date - a.posted_date;
+      });
+    setArticles(mappedArticles);
+  }, [articlesProp]);
 
   return (
     <>
@@ -40,7 +55,7 @@ const HomePage = () => {
               icon={GitHubIcon}
             />
             <SocialLink
-              href="https://www.instagram.com/zell1995/"
+              href="https://www.instagram.com/tech.withzell/"
               aria-label="Follow on Instagram"
               icon={InstagramIcon}
             />
@@ -57,8 +72,48 @@ const HomePage = () => {
           </div>
         </PageIntro>
       </Container>
+      <Container className="mt-24 md:mt-28">
+        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
+          <div className="flex flex-col gap-16">
+            {articles.map((article) => (
+              <ArticleCard key={article.id} article={article} />
+            ))}
+          </div>
+          <div className="space-y-10 lg:pl-16 xl:pl-18">
+            <ResumeCard resume={RESUME} />
+          </div>
+        </div>
+      </Container>
     </>
   );
 };
+
+export async function getStaticProps() {
+  const notionDatabaseId = process.env.NOTION_DATABASE;
+  const notionSecret = process.env.NOTION_API_KEY;
+
+  if (!notionDatabaseId || !notionSecret) {
+    return {
+      notFound: true,
+    };
+  }
+
+  const notion = new Client({
+    auth: notionSecret,
+  });
+
+  const query = await notion.databases.query({
+    database_id: notionDatabaseId,
+    // sort by the most recently created posts
+    sorts: [{ property: 'created', direction: 'descending' }],
+    filter: { property: 'public', checkbox: { equals: true } },
+  });
+
+  return {
+    props: {
+      articlesProp: query?.results ?? [],
+    },
+  };
+}
 
 export default HomePage;

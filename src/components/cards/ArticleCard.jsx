@@ -3,7 +3,57 @@ import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import Link from 'next/link';
 
-const ArticleCard = ({ article }) => {
+export const ArticleCard = ({ article, withTimelineBar = false }) => {
+  return (
+    <>
+      <article className="md:grid md:grid-cols-4 md:items-baseline">
+        <div className="group relative flex flex-col items-start md:col-span-3">
+          {/* Title */}
+          <h2 className="text-base font-semibold tracking-tight text-zinc-800 ">
+            <ArticleCardLink href={`/blogs/${article.id}`}>
+              {article.title}
+            </ArticleCardLink>
+          </h2>
+          <ArticleTimeline
+            dateTime={new Date()}
+            className={withTimelineBar ? 'md:hidden' : ''}
+            decorate
+          >
+            {formatDateToString(article.posted_date)}
+          </ArticleTimeline>
+          {/* Description */}
+          <p className="relative z-10 mt-2 text-sm text-zinc-600">
+            {article.description}
+          </p>
+          <div
+            aria-hidden="true"
+            className="relative z-10 mt-4 flex items-center text-sm font-medium text-teal-500"
+          >
+            Read post
+            <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current" />
+          </div>
+        </div>
+        {withTimelineBar && (
+          <ArticleTimeline
+            dateTime={new Date()}
+            className="mt-1 hidden md:block"
+          >
+            {formatDateToString(article.posted_date)}
+          </ArticleTimeline>
+        )}
+      </article>
+    </>
+    // <article className="group relative flex flex-col items-start">
+    //   <h2 className="text-base font-semibold tracking-tight text-zinc-800">
+    //     <ArticleCardLink href={`/blogs/${article.id}`}>
+    //       {article.title}
+    //     </ArticleCardLink>
+    //   </h2>
+    // </article>
+  );
+};
+
+export const ArticleCardWithTimeline = ({ article }) => {
   return (
     <>
       <article className="md:grid md:grid-cols-4 md:items-baseline">
@@ -76,5 +126,3 @@ const ArticleTimeline = ({
     </time>
   );
 };
-
-export default ArticleCard;
