@@ -13,7 +13,7 @@ import ResumeCard from '@/components/cards/ResumeCard';
 import PictureGallery from '@/components/picture-gallery/PictureGallery';
 import { ArticleCard } from '@/components/cards/ArticleCard';
 import { Client } from '@notionhq/client';
-import { MapNotionArticleToPost } from '@/services/ArticleMapper';
+import { transformNotionArticleToPost } from '@/services/notion-helper';
 import { RESUME_DETAILS } from '@/constants/resume-details';
 import { GALLERY_PICTURES } from '@/constants/pictures-gallery-details';
 
@@ -27,7 +27,7 @@ const HomePage = ({ articlesProp }) => {
       'WithZell - Software Developer, Dance Enthusiast, and Lifelong Learner';
 
     const mappedArticles = articlesProp
-      .map((article) => MapNotionArticleToPost(article))
+      .map((article) => transformNotionArticleToPost(article))
       .sort((a, b) => {
         return b.posted_date - a.posted_date;
       });

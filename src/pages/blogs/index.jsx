@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import Container from '../../components/container/Container';
 import { Client } from '@notionhq/client';
 import PageIntro from '@/components/page-intro/PageIntro';
-import { MapNotionArticleToPost } from '@/services/ArticleMapper';
+import { transformNotionArticleToPost } from '@/services/notion-helper';
 import { ArticleCard } from '@/components/cards/ArticleCard';
 
 const BlogPage = ({ articlesProp }) => {
@@ -13,7 +13,7 @@ const BlogPage = ({ articlesProp }) => {
     document.title = 'WithZell - Tech & Life Insights';
 
     const mappedArticles = articlesProp
-      .map((article) => MapNotionArticleToPost(article))
+      .map((article) => transformNotionArticleToPost(article))
       .sort((a, b) => {
         return b.posted_date - a.posted_date;
       });
