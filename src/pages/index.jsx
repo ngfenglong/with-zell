@@ -1,21 +1,24 @@
 import { useEffect, useState } from 'react';
-import Container from '../components/container/Container';
-import SocialLink from '../components/social-link/SocialLink';
+import Container from '@/components/container/Container';
+import SocialLink from '@/components/social-link/SocialLink';
 import {
   GitHubIcon,
   InstagramIcon,
   LeetCodeIcon,
   LinkedInIcon,
   TwitterIcon,
-} from '../components/social-link/Icons';
-import PageIntro from '../components/page-intro/PageIntro';
+} from '@/components/social-link/Icons';
+import PageIntro from '@/components/page-intro/PageIntro';
+import ResumeCard from '@/components/cards/ResumeCard';
+import PictureGallery from '@/components/picture-gallery/PictureGallery';
 import { ArticleCard } from '@/components/cards/ArticleCard';
 import { Client } from '@notionhq/client';
 import { MapNotionArticleToPost } from '@/services/ArticleMapper';
 import { RESUME_DETAILS } from '@/constants/resume-details';
-import ResumeCard from '@/components/cards/ResumeCard';
+import { GALLERY_PICTURES } from '@/constants/pictures-gallery-details';
 
 const RESUME = RESUME_DETAILS;
+const PICTURES = GALLERY_PICTURES;
 
 const HomePage = ({ articlesProp }) => {
   const [articles, setArticles] = useState([]);
@@ -43,7 +46,7 @@ const HomePage = ({ articlesProp }) => {
             work, I find joy in street dance, problem-solving, and the essence
             of computer science theory intrigues me.`}
         >
-          <div className="mt-6 flex gap-6">
+          <div className="mt-4 flex gap-6">
             <SocialLink
               href="https://www.linkedin.com/in/ngfenglong/"
               aria-label="Follow on LinkedIn"
@@ -72,6 +75,7 @@ const HomePage = ({ articlesProp }) => {
           </div>
         </PageIntro>
       </Container>
+      <PictureGallery pictures={PICTURES} />
       <Container className="mt-24 md:mt-28">
         <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col gap-16">
@@ -79,7 +83,7 @@ const HomePage = ({ articlesProp }) => {
               <ArticleCard key={article.id} article={article} />
             ))}
           </div>
-          <div className="space-y-10 lg:pl-16 xl:pl-18">
+          <div className="xl:pl-18 space-y-10 lg:pl-16">
             <ResumeCard resume={RESUME} />
           </div>
         </div>
