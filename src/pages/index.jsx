@@ -13,9 +13,9 @@ import ResumeCard from '@/components/cards/ResumeCard';
 import PictureGallery from '@/components/picture-gallery/PictureGallery';
 import { ArticleCard } from '@/components/cards/ArticleCard';
 import { Client } from '@notionhq/client';
-import { transformNotionArticleToPost } from '@/services/notion-helper';
 import { RESUME_DETAILS } from '@/constants/resume-details';
 import { GALLERY_PICTURES } from '@/constants/pictures-gallery-details';
+import { transformNotionArticleToPost } from '@/util/notion-rendering-helper';
 
 const RESUME = RESUME_DETAILS;
 const PICTURES = GALLERY_PICTURES;

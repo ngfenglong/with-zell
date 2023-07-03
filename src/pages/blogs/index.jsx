@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import Container from '../../components/container/Container';
-import { Client } from '@notionhq/client';
 import PageIntro from '@/components/page-intro/PageIntro';
-import { transformNotionArticleToPost } from '@/services/notion-helper';
+import { getDatabase } from '@/util/notion';
 import { ArticleCard } from '@/components/cards/ArticleCard';
+import { transformNotionArticleToPost } from '@/util/notion-rendering-helper';
 
 const BlogPage = ({ articlesProp }) => {
   const [articles, setArticles] = useState([]);
@@ -57,20 +57,15 @@ export async function getStaticProps() {
     };
   }
 
-  const notion = new Client({
-    auth: notionSecret,
-  });
-
-  const query = await notion.databases.query({
-    database_id: notionDatabaseId,
-    // sort by the most recently created posts
+  const filterOptions = {
     sorts: [{ property: 'created', direction: 'descending' }],
     filter: { property: 'public', checkbox: { equals: true } },
-  });
+  };
+  const database = await getDatabase(notionDatabaseId, filterOptions);
 
   return {
     props: {
-      articlesProp: query?.results ?? [],
+      articlesProp: database ?? [],
     },
   };
 }
