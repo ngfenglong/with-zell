@@ -1,7 +1,7 @@
 import Container from '@/components/container/Container';
 import { getBlocks, getPage } from '@/util/notion';
 import { Text, renderBlock } from '@/util/notion-rendering-helper';
-import Link from 'next/link';
+import { ArrowLeftIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 
@@ -9,21 +9,28 @@ const BlogDetailPage = ({ page, blocks }) => {
   const router = useRouter();
 
   return (
-    <Container className="mt-16 sm:mt-32">
-      <h1 className="text-5xl">
+    <Container className="mx-auto mt-16 max-w-screen-md whitespace-pre-line px-5 leading-normal sm:mt-16">
+      <h1 className="text-3xl font-extrabold">
         <Text text={page.properties.post.title} />
       </h1>
       <section>
         {blocks.map((block) => (
           <Fragment key={block.id}>{renderBlock(block)}</Fragment>
         ))}
-        <button
-          onClick={() => {
-            router.back();
-          }}
-        >
-          ← Go home
-        </button>
+        <div className="lg:mt-12 md:mt-8 mt-4">
+          <button
+            className="flex flex-row items-center gap-2 text-gray-500 hover:text-teal-500"
+            onClick={() => {
+              router.back();
+            }}
+          >
+            <ArrowLeftIcon
+              className="h-5 w-5 flex-shrink-0 hover:text-teal-500"
+              aria-hidden="true"
+            />
+            <span className="align-text-top">Go back</span>
+          </button>
+        </div>
       </section>
     </Container>
   );

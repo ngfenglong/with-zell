@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 import { Fragment } from 'react';
 
@@ -104,7 +103,13 @@ export const Text = ({ text }) => {
         style={color !== 'default' ? { color } : {}}
         key={text.content}
       >
-        {text.link ? <a href={text.link.url}>{text.content}</a> : text.content}
+        {text.link ? (
+          <a className="text-blue-500 no-underline" href={text.link.url}>
+            {text.content}
+          </a>
+        ) : (
+          text.content
+        )}
       </span>
     );
   });
@@ -130,33 +135,41 @@ export const renderBlock = (block) => {
   switch (type) {
     case 'paragraph':
       return (
-        <p>
+        <p className="mx-0 my-4 block">
           <Text text={value.rich_text} />
         </p>
       );
     case 'heading_1':
       return (
-        <h1>
+        <h1 className="text-3xl font-extrabold leading-none">
           <Text text={value.rich_text} />
         </h1>
       );
     case 'heading_2':
       return (
-        <h2>
+        <h2 className="my-3 text-xl font-bold">
           <Text text={value.rich_text} />
         </h2>
       );
     case 'heading_3':
       return (
-        <h3>
+        <h3 className="my-4 block text-lg font-bold">
           <Text text={value.rich_text} />
         </h3>
       );
     case 'bulleted_list': {
-      return <ul>{value.children.map((child) => renderBlock(child))}</ul>;
+      return (
+        <ul className="my-4 list-disc pl-10">
+          {value.children.map((child) => renderBlock(child))}
+        </ul>
+      );
     }
     case 'numbered_list': {
-      return <ol>{value.children.map((child) => renderBlock(child))}</ol>;
+      return (
+        <ol className="my-4 list-decimal pl-10">
+          {value.children.map((child) => renderBlock(child))}
+        </ol>
+      );
     }
     case 'bulleted_list_item':
     case 'numbered_list_item':
@@ -170,7 +183,12 @@ export const renderBlock = (block) => {
       return (
         <div>
           <label htmlFor={id}>
-            <input type="checkbox" id={id} defaultChecked={value.checked} />{' '}
+            <input
+              className=""
+              type="checkbox"
+              id={id}
+              defaultChecked={value.checked}
+            />{' '}
             <Text text={value.rich_text} />
           </label>
         </div>
@@ -188,8 +206,8 @@ export const renderBlock = (block) => {
       );
     case 'child_page':
       return (
-        <div className="rounded-xl border border-current p-5">
-          <strong>{value.title}</strong>
+        <div className="rounded-lg border border-solid border-gray-300 p-5">
+          <strong className="font-bold">{value.title}</strong>
           {block.children.map((child) => renderBlock(child))}
         </div>
       );
@@ -198,19 +216,28 @@ export const renderBlock = (block) => {
         value.type === 'external' ? value.external.url : value.file.url;
       const caption = value.caption ? value.caption[0]?.plain_text : '';
       return (
-        <figure>
-          <img src={src} alt={caption} />
+        <figure className="my-4 block">
+          <img className="overflow-hidden" src={src} alt={caption} />
           {caption && <figcaption>{caption}</figcaption>}
         </figure>
       );
     case 'divider':
-      return <hr key={id} />;
+      return (
+        <hr
+          className="border-1 mx-auto my-2 block overflow-hidden border-solid rtl:mix-blend-normal"
+          key={id}
+        />
+      );
     case 'quote':
-      return <blockquote key={id}>{value.rich_text[0].plain_text}</blockquote>;
+      return (
+        <blockquote className="mx-10 my-4 block" key={id}>
+          {value.rich_text[0].plain_text}
+        </blockquote>
+      );
     case 'code':
       return (
-        <pre className="my-5 overflow-auto rounded-xl bg-gray-200 px-1 py-0.5 leading-9">
-          <code className="flex flex-wrap px-5 font-mono" key={id}>
+        <pre className="leading-2.3 my-5 overflow-auto overflow-auto rounded-lg  bg-gray-200 px-1 py-0.5">
+          <code className="flex flex-wrap p-5 font-mono" key={id}>
             {value.rich_text[0].plain_text}
           </code>
         </pre>
@@ -222,8 +249,8 @@ export const renderBlock = (block) => {
       const lastElementInArray = splitSourceArray[splitSourceArray.length - 1];
       const caption_file = value.caption ? value.caption[0]?.plain_text : '';
       return (
-        <figure>
-          <div className="px-1 py-0.5 no-underline">
+        <figure className="my-4 block">
+          <div className="px-2 py-1 no-underline">
             📎{' '}
             <Link href={src_file} passHref>
               {lastElementInArray.split('?')[0]}
@@ -235,27 +262,38 @@ export const renderBlock = (block) => {
     case 'bookmark':
       const href = value.url;
       return (
-        <a href={href} target="_brank" className="mb-2.5 block">
+        <a
+          href={href}
+          target="_brank"
+          className="mb-2.5 block text-blue-600 no-underline"
+        >
           {href}
         </a>
       );
     case 'table': {
       return (
-        <table className="collapse border border-current">
-          <tbody>
+        <table className="table-border table space-x-2 indent-0">
+          <tbody className="table-row-group border-current align-middle">
             {block.children?.map((child, i) => {
-              const RowElement =
-                value.has_column_header && i == 0 ? 'th' : 'td';
+              const RowElement = ({ key, children }) => {
+                return value.has_column_header && i == 0 ? (
+                  <th className="border-grey-200 table-cell border bg-gray-200 px-3 py-1.5 text-left text-center align-middle font-bold">
+                    {children}
+                  </th>
+                ) : (
+                  <td className="border-grey-200 border px-3 py-1.5">
+                    {children}
+                  </td>
+                );
+              };
               return (
-                <tr className="flex" key={child.id}>
+                <tr
+                  className="table-row border-current align-middle"
+                  key={child.id}
+                >
                   {child.table_row?.cells?.map((cell, i) => {
                     return (
-                      <RowElement
-                        className={`border border-current px-3 py-1.5 ${
-                          value.has_column_header && i == 0 ? 'bg-gray-200' : ''
-                        }`}
-                        key={`${cell.plain_text}-${i}`}
-                      >
+                      <RowElement key={`${cell.plain_text}-${i}`}>
                         <Text text={cell} />
                       </RowElement>
                     );
@@ -275,7 +313,11 @@ export const renderBlock = (block) => {
       );
     }
     case 'column': {
-      return <div>{block.children.map((child) => renderBlock(child))}</div>;
+      return (
+        <div className="flex-1">
+          {block.children.map((child) => renderBlock(child))}
+        </div>
+      );
     }
     default:
       return `❌ Unsupported block (${
