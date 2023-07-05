@@ -275,7 +275,7 @@ export const renderBlock = (block) => {
         <table className="table-border table space-x-2 indent-0">
           <tbody className="table-row-group border-current align-middle">
             {block.children?.map((child, i) => {
-              const RowElement = ({ key, children }) => {
+              const RowElement = ({ children }) => {
                 return value.has_column_header && i == 0 ? (
                   <th className="border-grey-200 table-cell border bg-gray-200 px-3 py-1.5 text-left text-center align-middle font-bold">
                     {children}
@@ -293,7 +293,7 @@ export const renderBlock = (block) => {
                 >
                   {child.table_row?.cells?.map((cell, i) => {
                     return (
-                      <RowElement key={`${cell.plain_text}-${i}`}>
+                      <RowElement key={`${child.id} - ${i}`}>
                         <Text text={cell} />
                       </RowElement>
                     );
