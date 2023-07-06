@@ -17,7 +17,7 @@ export const ArticleCard = ({ article, withTimelineBar = false }) => {
           </h2>
           <div className="my-2 flex gap-1 opacity-100 transition group-hover:scale-100 group-hover:opacity-100 ">
             {article.tags.map((tag, id) => (
-              <Badge key={tag + id} text={tag}></Badge>
+              <Badge key={tag + id} className="bg-gray-50" text={tag}></Badge>
             ))}
           </div>
 

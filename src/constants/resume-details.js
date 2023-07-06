@@ -5,16 +5,15 @@ export const RESUME_DETAILS = [
     companyName: 'Accenture',
     roles: [
       {
-        title: ['Full-Stack Software Developer, ', 'Senior Analyst'],
+        title: ['Full-Stack Software Developer/ ', 'Senior Analyst'],
         start_date: 'Jun 2022',
         end_date: 'Present',
       },
       {
-        title: ['Full-Stack Software Developer, ', 'Analyst'],
+        title: ['Full-Stack Software Developer/ ', 'Analyst'],
         start_date: 'Jan 2021',
         end_date: 'Jun 2022',
-      },
-    ],
+      },    ],
     logo: ACCENTURE_LOGO,
   },
 

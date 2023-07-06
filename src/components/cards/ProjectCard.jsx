@@ -8,7 +8,7 @@ const TechnologyCard = ({ technology }) => {
   return (
     <div className="my-4 flex flex-row gap-1">
       {Object.entries(technology).map(([key, value]) => {
-        let bgColor = 'bg-gray-50';
+        let bgColor;
         switch (key) {
           case 'frontend':
             bgColor = 'bg-amber-200';
@@ -17,7 +17,7 @@ const TechnologyCard = ({ technology }) => {
             bgColor = 'bg-blue-200';
             break;
           case 'database':
-            bgColor = 'bg-grey-200';
+            bgColor = 'bg-gray-200';
             break;
           default:
             bgColor = 'bg-gray-50';
