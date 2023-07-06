@@ -27,6 +27,7 @@ export const transformNotionArticleToPost = (article) => {
     description: getPropertyValue(properties, BlogColumns.DESCRIPTION),
     post_image: getPropertyValue(properties, BlogColumns.POST_IMAGE),
     posted_date: date,
+    tags:getPropertyValue(properties, BlogColumns.TAGS),
   };
 };
 

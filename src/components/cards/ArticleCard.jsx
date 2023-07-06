@@ -2,6 +2,7 @@ import { formatDate, formatDateToString } from '@/util/date-helper';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import Link from 'next/link';
+import Badge from '../badge/badge';
 
 export const ArticleCard = ({ article, withTimelineBar = false }) => {
   return (
@@ -14,6 +15,12 @@ export const ArticleCard = ({ article, withTimelineBar = false }) => {
               {article.title}
             </ArticleCardLink>
           </h2>
+          <div className="my-2 flex gap-1 opacity-100 transition group-hover:scale-100 group-hover:opacity-100 ">
+            {article.tags.map((tag, id) => (
+              <Badge key={tag + id} text={tag}></Badge>
+            ))}
+          </div>
+
           <ArticleTimeline
             dateTime={new Date()}
             className={withTimelineBar ? 'md:hidden' : ''}
@@ -43,13 +50,6 @@ export const ArticleCard = ({ article, withTimelineBar = false }) => {
         )}
       </article>
     </>
-    // <article className="group relative flex flex-col items-start">
-    //   <h2 className="text-base font-semibold tracking-tight text-zinc-800">
-    //     <ArticleCardLink href={`/blogs/${article.id}`}>
-    //       {article.title}
-    //     </ArticleCardLink>
-    //   </h2>
-    // </article>
   );
 };
 
