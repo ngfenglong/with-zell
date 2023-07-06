@@ -5,8 +5,16 @@ export const PROJECTS_DETAILS = [
     name: 'Ikou Application',
     description:
       'An interactive app helping users discover and plan activities around food, games, and entertainment. Users can add and access unique places.',
-    technology: ['React-typescript,', 'Go lang', 'MySQL'],
-    link: { href: 'https://ikou-web.netlify.app/', label: 'ikou-web.netlify.app' },
+    technology: {
+      // ['React-typescript,', 'Go lang', 'MySQL'],
+      frontend: 'React w/ TypeScript',
+      backend: 'Golang',
+      database: 'MySQL',
+    },
+    link: {
+      href: 'https://ikou-web.netlify.app/',
+      label: 'ikou-web.netlify.app',
+    },
     github: [
       {
         href: 'https://github.com/ngfenglong/ikou-website',
@@ -23,7 +31,11 @@ export const PROJECTS_DETAILS = [
     name: 'Trade Tracker',
     description:
       'A comprehensive app for tracking trading records, generating metrics, and refining strategies. It also provides individual profit and loss assessments.',
-    technology: ['React-typescript,', 'NodeJS', 'MongoDB'],
+    technology: {
+      frontend: 'React w/ TypeScript',
+      backend: 'NodeJS',
+      database: 'MongoDB'
+    },
     link: {
       href: 'https://trade-tracker.netlify.app/',
       label: 'trade-tracker.netlify.app',
@@ -40,7 +52,11 @@ export const PROJECTS_DETAILS = [
     name: 'Time To Makan',
     description:
       ' food-choice randomizer specifically for the Novena area in Singapore, designed to solve the lunchtime indecision dilemma.',
-    technology: ['React,', 'Go lang', 'MySQL'],
+    technology: {
+      frontend: 'React',
+      backend: 'Golang',
+      database: 'MySQL',
+    },
     link: {
       href: 'https://makan-place-randomizer.netlify.app/',
       label: 'makan-place-randomizer.netlify.app',
