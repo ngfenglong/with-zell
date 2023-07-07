@@ -8,22 +8,22 @@ const TechnologyCard = ({ technology }) => {
   return (
     <div className="my-4 flex flex-row gap-1">
       {Object.entries(technology).map(([key, value]) => {
-        let bgColor;
+        let color;
         switch (key) {
           case 'frontend':
-            bgColor = 'bg-amber-200';
+            color = 'amber';
             break;
           case 'backend':
-            bgColor = 'bg-blue-200';
+            color = 'blue';
             break;
           case 'database':
-            bgColor = 'bg-gray-200';
+            color = 'gray';
             break;
           default:
-            bgColor = 'bg-gray-50';
+            color = 'gray';
             break;
         }
-        return <Badge key={key} text={value} className={bgColor} />;
+        return <Badge key={key} text={value} color={color} />;
       })}
     </div>
   );

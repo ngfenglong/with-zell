@@ -27,8 +27,17 @@ export const transformNotionArticleToPost = (article) => {
     description: getPropertyValue(properties, BlogColumns.DESCRIPTION),
     post_image: getPropertyValue(properties, BlogColumns.POST_IMAGE),
     posted_date: date,
-    tags:getPropertyValue(properties, BlogColumns.TAGS),
+    tags: getCategoryTags(properties),
   };
+};
+
+export const getCategoryTags = (properties) => {
+  if (!properties?.tags) return [];
+
+  const tags = properties.tags;
+  return tags[tags.type]?.map((x) => {
+    return { text: x.name, color: x.color };
+  });
 };
 
 /**

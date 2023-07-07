@@ -117,6 +117,7 @@ export async function getStaticProps() {
     props: {
       articlesProp: query?.results ?? [],
     },
+    revalidate: 1,
   };
 }
 

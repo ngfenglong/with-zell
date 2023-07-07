@@ -1,19 +1,23 @@
+import Badge from '@/components/badge/badge';
 import Container from '@/components/container/Container';
 import { formatDateToString } from '@/util/date-helper';
 import { getBlocks, getPage } from '@/util/notion';
-import { Text, renderBlock } from '@/util/notion-rendering-helper';
+import {
+  Text,
+  getCategoryTags,
+  renderBlock,
+} from '@/util/notion-rendering-helper';
 import { ArrowLeftIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/router';
 import { Fragment } from 'react';
 
 const BlogDetailPage = ({ page, blocks, dateStr }) => {
   const router = useRouter();
+  const tags = getCategoryTags(page.properties);
   return (
-    // <Container className="mx-auto mt-16 max-w-screen-lg whitespace-pre-line px-5 leading-normal lg:mt-16">
-    <Container className="mt-16 lg:mt-32">
+    <Container className="mt-16 lg:mt-24">
       <div className="xl:relative">
         <div className="mx-auto max-w-2xl">
-          {/* <div className="flex gap-2"> */}
           <button
             type="button"
             onClick={() => router.back()}
@@ -22,13 +26,21 @@ const BlogDetailPage = ({ page, blocks, dateStr }) => {
           >
             <ArrowLeftIcon className="h-4 w-4 stroke-zinc-500 transition group-hover:stroke-zinc-700 " />
           </button>
-          {/* <span className="mt-1 text-zinc-600">Go Back</span>
-        </div> */}
+
           <article>
             <header className="flex flex-col">
               <h1 className="mt-6 text-3xl font-bold tracking-tight text-zinc-800 sm:text-2xl">
                 <Text text={page.properties.post.title} />
               </h1>
+              <div className="my-4 flex gap-1 transition">
+                {tags.map((tag, id) => (
+                  <Badge
+                    key={tag.text + id}
+                    color={tag.color}
+                    text={tag?.text}
+                  ></Badge>
+                ))}
+              </div>
 
               <time
                 dateTime={new Date(dateStr)}

@@ -67,6 +67,7 @@ export async function getStaticProps() {
     props: {
       articlesProp: database ?? [],
     },
+    revalidate: 1,
   };
 }
 

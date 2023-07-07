@@ -1,4 +1,4 @@
-import { formatDate, formatDateToString } from '@/util/date-helper';
+import { formatDateToString } from '@/util/date-helper';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import clsx from 'clsx';
 import Link from 'next/link';
@@ -17,7 +17,7 @@ export const ArticleCard = ({ article, withTimelineBar = false }) => {
           </h2>
           <div className="my-2 flex gap-1 opacity-100 transition group-hover:scale-100 group-hover:opacity-100 ">
             {article.tags.map((tag, id) => (
-              <Badge key={tag + id} className="bg-gray-50" text={tag}></Badge>
+              <Badge key={tag.text + id} color={tag.color} text={tag.text}></Badge>
             ))}
           </div>
 
