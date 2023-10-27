@@ -1,4 +1,9 @@
-import { IKOU_LOGO, TRADE_TRACKER_LOGO, TTM_LOGO } from './assets';
+import {
+  IKOU_LOGO,
+  TRADE_TRACKER_LOGO,
+  TTM_LOGO,
+  GO_SCRAPE_FLOW_LOGO,
+} from './assets';
 
 export const PROJECTS_DETAILS = [
   {
@@ -34,7 +39,7 @@ export const PROJECTS_DETAILS = [
     technology: {
       frontend: 'React w/ TypeScript',
       backend: 'NodeJS',
-      database: 'MongoDB'
+      database: 'MongoDB',
     },
     link: {
       href: 'https://trade-tracker.netlify.app/',
@@ -51,7 +56,7 @@ export const PROJECTS_DETAILS = [
   {
     name: 'Time To Makan',
     description:
-      ' food-choice randomizer specifically for the Novena area in Singapore, designed to solve the lunchtime indecision dilemma.',
+      'A food-choice randomizer specifically for the Novena area in Singapore, designed to solve the lunchtime indecision dilemma.',
     technology: {
       frontend: 'React',
       backend: 'Golang',
@@ -63,5 +68,23 @@ export const PROJECTS_DETAILS = [
     },
     github: [],
     logo: TTM_LOGO,
+  },
+  {
+    name: 'GoScrapeFlow',
+    description:
+      'A robust Go-based tool tailored for efficient web scraping through sitemaps. Designed with a modular architecture, it provides proxy rotation and future logging and data exporting capabilities.',
+    technology: {
+      backend: 'Golang',
+    },
+    link: {
+      href: 'https://github.com/ngfenglong/go-scrape-flow',
+    },
+    github: [
+      {
+        href: 'https://github.com/ngfenglong/go-scrape-flow',
+        label: 'Go-scrape-flow-repo',
+      },
+    ],
+    logo: GO_SCRAPE_FLOW_LOGO,
   },
 ];

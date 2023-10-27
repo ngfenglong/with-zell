@@ -51,7 +51,7 @@ const ProjectCard = ({ project }) => {
       </Link>
       {project.technology && <TechnologyCard technology={project.technology} />}
       <p className="relative z-10 mt-6 flex flex-col gap-1 text-sm font-medium text-zinc-400 transition">
-        {project.link && (
+        {project.link?.label && (
           <Link className="flex flex-row items-center" href={project.link.href}>
             <GlobeAltIcon className="h-6 w-6 flex-none" />
             <span className="ml-2">{project.link.label}</span>
