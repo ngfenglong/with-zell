@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { GlobeAltIcon } from '@heroicons/react/20/solid';
-import { GitHubIcon } from '../social-link/Icons';
+import { GitHubIcon, TelegramIcon } from '../social-link/Icons';
 import Image from 'next/image';
 import Badge from '../badge/badge';
 
@@ -15,6 +15,9 @@ const TechnologyCard = ({ technology }) => {
             break;
           case 'backend':
             color = 'blue';
+            break;
+          case 'automation':
+            color = 'green';
             break;
           case 'database':
             color = 'gray';
@@ -55,6 +58,12 @@ const ProjectCard = ({ project }) => {
           <Link className="flex flex-row items-center" href={project.link.href}>
             <GlobeAltIcon className="h-6 w-6 flex-none" />
             <span className="ml-2">{project.link.label}</span>
+          </Link>
+        )}
+        {project.telegram?.label && (
+          <Link className="flex flex-row items-center" href={project.telegram.href}>
+            <TelegramIcon className="h-6 w-6 flex-none" />
+            <span className="ml-2">{project.telegram.label}</span>
           </Link>
         )}
         {project.github.map((githubLink) => {
