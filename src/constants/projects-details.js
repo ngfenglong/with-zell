@@ -22,7 +22,7 @@ export const PROJECTS_DETAILS = [
     github: [
       {
         href: "https://github.com/ngfenglong/ikou-website",
-        label: "github.com/ngfenglong/ikou-website",
+        label: "Ikou-frontend-github-repo",
       },
       {
         href: "https://github.com/ngfenglong/Ikou-backend",
@@ -71,7 +71,7 @@ export const PROJECTS_DETAILS = [
     github: [
       {
         href: "https://github.com/ngfenglong/food-randomizer-bot",
-        label: "TTM Telegram Bot",
+        label: "Food-randomizer-bot-repo",
       },
     ],
     telegram: {
