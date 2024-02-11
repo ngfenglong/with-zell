@@ -72,6 +72,9 @@ export const PROJECTS_DETAILS = [
       {
         href: "https://github.com/ngfenglong/food-randomizer-bot",
         label: "Food-randomizer-bot-repo",
+      },  {
+        href: "https://github.com/ngfenglong/food-randomizer-BE",
+        label: "Food-randomizer-API",
       },
     ],
     telegram: {
