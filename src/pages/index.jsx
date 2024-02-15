@@ -6,6 +6,7 @@ import {
   InstagramIcon,
   LeetCodeIcon,
   LinkedInIcon,
+  MediumIcon,
   TwitterIcon,
 } from '@/components/social-link/Icons';
 import PageIntro from '@/components/page-intro/PageIntro';
@@ -68,9 +69,14 @@ const HomePage = ({ articlesProp }) => {
               icon={TwitterIcon}
             />
             <SocialLink
-              href="https://leetcode.com/zell1502/"
+              href="https://leetcode.com/zell_dev/"
               aria-label="Follow on Leetcode"
               icon={LeetCodeIcon}
+            />
+            <SocialLink
+              href="https://medium.com/@zell_dev"
+              aria-label="Follow on Medium"
+              icon={MediumIcon}
             />
           </div>
         </PageIntro>
