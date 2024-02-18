@@ -7,6 +7,7 @@ import {
   LeetCodeIcon,
   LinkedInIcon,
   MailIcon,
+  MediumIcon,
   TwitterIcon,
 } from '../../components/social-link/Icons';
 import { ABOUT_PICTURE } from '../../constants/assets';
@@ -108,10 +109,16 @@ const AboutPage = () => {
                 Follow on Twitter
               </SocialLink>
               <SocialLink
-                href="https://leetcode.com/zell1502/"
+                href="https://leetcode.com/zell_dev/"
                 icon={LeetCodeIcon}
               >
                 Follow on Leetcode
+              </SocialLink>
+              <SocialLink
+                href="https://medium.com/@zell_dev/"
+                icon={MediumIcon}
+              >
+                Follow on Medium
               </SocialLink>
               <hr className="text-zinc-100" />
               <SocialLink href="mailto:zell_dev@hotmail.com" icon={MailIcon}>
