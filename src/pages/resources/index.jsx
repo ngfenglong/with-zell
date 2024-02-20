@@ -3,10 +3,13 @@ import { getBlocks, getPage } from "@/util/notion";
 import { Fragment } from "react";
 import { renderBlock } from "@/util/notion-rendering-helper";
 
-const ResourcesPage = ({page, blocks, dateStr}) => {
+const ResourcesPage = ({ page, blocks, dateStr }) => {
   return (
     <>
       <Container className="pb-12 pt-16">
+        <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-2xl">
+        Resources - A Personal Collection from My Software Engineering Exploration
+        </h1>
         <article>
           <section>
             {blocks.map((block) => (
