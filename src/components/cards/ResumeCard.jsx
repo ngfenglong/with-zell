@@ -1,12 +1,18 @@
-const { BriefcaseIcon } = require('@heroicons/react/20/solid');
+const { BriefcaseIcon, AcademicCapIcon } = require('@heroicons/react/20/solid');
 const Image = require('next/image');
 
-const ResumeCard = ({ resume }) => {
+const ResumeIconConfig = {
+  'Work': <BriefcaseIcon className="h-6 w-6 flex-none" />,
+  'Education': <AcademicCapIcon className="h-6 w-6 flex-none" />
+}
+
+const ResumeCard = ({ title = 'Work', resume }) => {
   return (
     <div className="rounded-2xl border border-zinc-100 p-6">
       <h2 className="flex text-sm font-semibold text-zinc-900">
-        <BriefcaseIcon className="h-6 w-6 flex-none" />
-        <span className="ml-3">Work</span>
+        {/* <BriefcaseIcon className="h-6 w-6 flex-none" /> */}
+        {ResumeIconConfig[title]}
+        <span className="ml-3">{title}</span>
       </h2>
       <ol className="mt-6 space-y-2">
         {resume.map((company, companyIndex) => (

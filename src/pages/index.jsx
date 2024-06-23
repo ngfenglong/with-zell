@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import Container from '@/components/container/Container';
+import {Container} from '@/components/container/Container';
 import SocialLink from '@/components/social-link/SocialLink';
 import {
   GitHubIcon,
@@ -14,11 +14,13 @@ import ResumeCard from '@/components/cards/ResumeCard';
 import PictureGallery from '@/components/picture-gallery/PictureGallery';
 import { ArticleCard } from '@/components/cards/ArticleCard';
 import { Client } from '@notionhq/client';
-import { RESUME_DETAILS } from '@/constants/resume-details';
+import { WORK_EXPERIENCE_DETAILS } from '@/constants/work-experience-details';
+import { EDUCATION_DETAILS } from '@/constants/education-details';
 import { GALLERY_PICTURES } from '@/constants/pictures-gallery-details';
 import { transformNotionArticleToPost } from '@/util/notion-rendering-helper';
 
-const RESUME = RESUME_DETAILS;
+const WORK_EXPERIENCE = WORK_EXPERIENCE_DETAILS;
+const EDUCATION_EXPERIENCE = EDUCATION_DETAILS;
 const PICTURES = GALLERY_PICTURES;
 
 const HomePage = ({ articlesProp }) => {
@@ -83,14 +85,15 @@ const HomePage = ({ articlesProp }) => {
       </Container>
       <PictureGallery pictures={PICTURES} />
       <Container className="mt-24 md:mt-28">
-        <div className="mx-auto grid max-w-xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col gap-16">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
+          <div className="flex flex-col gap-16 lg:-mr-10">
             {articles.map((article) => (
               <ArticleCard key={article.id} article={article} />
             ))}
           </div>
-          <div className="xl:pl-18 space-y-10 lg:pl-16">
-            <ResumeCard resume={RESUME} />
+          <div className="xl:pl-18 space-y-4 lg:pl-16 lg:-mr-10" >
+            <ResumeCard title="Work" resume={WORK_EXPERIENCE} />
+            <ResumeCard title="Education" resume={EDUCATION_EXPERIENCE} />
           </div>
         </div>
       </Container>

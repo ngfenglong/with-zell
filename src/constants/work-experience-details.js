@@ -1,6 +1,6 @@
 import { ACCENTURE_LOGO, GIC_LOGO, NUS_LOGO } from './assets';
 
-export const RESUME_DETAILS = [
+export const WORK_EXPERIENCE_DETAILS = [
   {
     companyName: 'Accenture',
     roles: [

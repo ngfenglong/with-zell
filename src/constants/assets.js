@@ -11,6 +11,7 @@ export const GO_SCRAPE_FLOW_LOGO = '/images/project-logos/goscrapeflow.png';
 export const ACCENTURE_LOGO = '/images/company-logos/accenture.jpeg';
 export const NUS_LOGO = '/images/company-logos/nus.jpeg';
 export const GIC_LOGO = '/images/company-logos/gic.jpeg';
+export const NYP_LOGO= '/images/company-logos/nyp.jpeg'
 
 // Gallery Pictures
 export const GALLERY_PICTURE_1 = '/images/picture-gallery/pic1.jpg';
