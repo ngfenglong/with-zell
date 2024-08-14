@@ -3,6 +3,7 @@ import {
   TRADE_TRACKER_LOGO,
   TTM_LOGO,
   GO_SCRAPE_FLOW_LOGO,
+  SPOTIFY_TOP_100_LOGO
 } from "./assets";
 
 export const PROJECTS_DETAILS = [
@@ -102,4 +103,25 @@ export const PROJECTS_DETAILS = [
     telegram: {},
     logo: GO_SCRAPE_FLOW_LOGO,
   },
+  {
+    name: "Predicting Spotify Top 100 Hits",
+    description:
+      "A machine learning project predicting whether a song will appear in Spotify's Top 100 chart. The project includes data preprocessing, feature engineering, model selection, and deployment as a web application.",
+    technology: {
+      frontend: "HTML, CSS, JavaScript",
+      backend: "Python",
+    },
+    link: {
+      href: "https://spotify-top-100-track-classifier.onrender.com/",
+      label: "spotify-top-100-track-classifier",
+    },
+    github: [
+      {
+        href: "https://github.com/ngfenglong/Predicting-Spotify-Top-100-Hits",
+        label: "Predicting-Spotify-Top-100-Hits",
+      }
+    ],
+    telegram: {},
+    logo: SPOTIFY_TOP_100_LOGO,
+}
 ];
