@@ -329,6 +329,21 @@ export const renderBlock = (block) => {
         </div>
       );
     }
+    case 'quote':
+      return (
+        <blockquote className="mx-10 my-4 block" key={id}>
+          {value.rich_text.length > 0 ? value.rich_text[0].plain_text : "No content available"}
+        </blockquote>
+      );
+
+    case 'code':
+      return (
+        <pre className="bg-gray-200 rounded-lg p-5 my-5 overflow-auto" key={id}>
+          <code className="font-mono whitespace-pre-wrap">
+            {value.rich_text.length > 0 ? value.rich_text[0].plain_text : "No code snippet available"}
+          </code>
+        </pre>
+      );
     default:
       return `❌ Unsupported block (${
         type === 'unsupported' ? 'unsupported by Notion API' : type
