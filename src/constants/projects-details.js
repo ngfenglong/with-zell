@@ -3,10 +3,52 @@ import {
   TRADE_TRACKER_LOGO,
   TTM_LOGO,
   GO_SCRAPE_FLOW_LOGO,
-  SPOTIFY_TOP_100_LOGO
+  SPOTIFY_TOP_100_LOGO,
+  STOCK_SCOUTER_BOT_LOGO
 } from "./assets";
 
 export const PROJECTS_DETAILS = [
+ 
+  {
+    name: "Stock Scouter Bot",
+    description:
+      "A Telegram bot designed to simplify swing trading by providing real-time market insights and efficient trading plan management. This bot allows users to retrieve detailed stock information, discover market trends, and manage personalized trading strategies.",
+    technology: {
+      backend: "Python",
+      automation: "Shell",
+      database: "MySQL",
+    },
+    github: [],
+    link: {
+      href: "https://t.me/stock_scouter_bot",
+    },
+    telegram: {
+      href: "https://t.me/stock_scouter_bot",
+      label: "https://t.me/stock_scouter_bot",
+    } ,
+    logo: STOCK_SCOUTER_BOT_LOGO,
+  },
+  {
+    name: "Predicting Spotify Top 100 Hits",
+    description:
+      "A machine learning project predicting whether a song will appear in Spotify's Top 100 chart. The project includes data preprocessing, feature engineering, model selection, and deployment as a web application.",
+    technology: {
+      frontend: "HTML, CSS, JavaScript",
+      backend: "Python",
+    },
+    link: {
+      href: "https://spotify-top-100-track-classifier.onrender.com/",
+      label: "spotify-top-100-track-classifier",
+    },
+    github: [
+      {
+        href: "https://github.com/ngfenglong/Predicting-Spotify-Top-100-Hits",
+        label: "Predicting-Spotify-Top-100-Hits",
+      }
+    ],
+    telegram: {},
+    logo: SPOTIFY_TOP_100_LOGO,
+  },
   {
     name: "Ikou Application",
     description:
@@ -32,27 +74,6 @@ export const PROJECTS_DETAILS = [
     ],
     telegram: {},
     logo: IKOU_LOGO,
-  },
-  {
-    name: "Predicting Spotify Top 100 Hits",
-    description:
-      "A machine learning project predicting whether a song will appear in Spotify's Top 100 chart. The project includes data preprocessing, feature engineering, model selection, and deployment as a web application.",
-    technology: {
-      frontend: "HTML, CSS, JavaScript",
-      backend: "Python",
-    },
-    link: {
-      href: "https://spotify-top-100-track-classifier.onrender.com/",
-      label: "spotify-top-100-track-classifier",
-    },
-    github: [
-      {
-        href: "https://github.com/ngfenglong/Predicting-Spotify-Top-100-Hits",
-        label: "Predicting-Spotify-Top-100-Hits",
-      }
-    ],
-    telegram: {},
-    logo: SPOTIFY_TOP_100_LOGO,
   },
   {
     name: "Trade Tracker",
