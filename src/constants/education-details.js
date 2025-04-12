@@ -7,7 +7,7 @@ export const EDUCATION_DETAILS = [
       {
         title: ['Sepcialist Diploma in Applied Artificial Intelligence'],
         start_date: 'Apr 2024',
-        end_date: 'Present',
+        end_date: 'Mar 2025',
       }],
     logo: NYP_LOGO,
   },
