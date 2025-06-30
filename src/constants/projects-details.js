@@ -31,14 +31,10 @@ export const PROJECTS_DETAILS = [
   {
     name: "Predicting Spotify Top 100 Hits",
     description:
-      "A machine learning project predicting whether a song will appear in Spotify's Top 100 chart. The project includes data preprocessing, feature engineering, model selection, and deployment as a web application.",
+      "A classical machine learning project predicting whether a song will appear in Spotify's Top 100 chart. The project includes data preprocessing, feature engineering, model selection, and deployment as a web application.",
     technology: {
       frontend: "HTML, CSS, JavaScript",
       backend: "Python",
-    },
-    link: {
-      href: "https://spotify-top-100-track-classifier.onrender.com/",
-      label: "spotify-top-100-track-classifier",
     },
     github: [
       {
