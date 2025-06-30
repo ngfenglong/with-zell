@@ -4,11 +4,10 @@ import {
   TTM_LOGO,
   GO_SCRAPE_FLOW_LOGO,
   SPOTIFY_TOP_100_LOGO,
-  STOCK_SCOUTER_BOT_LOGO
+  STOCK_SCOUTER_BOT_LOGO,
 } from "./assets";
 
 export const PROJECTS_DETAILS = [
- 
   {
     name: "Stock Scouter Bot",
     description:
@@ -25,7 +24,7 @@ export const PROJECTS_DETAILS = [
     telegram: {
       href: "https://t.me/stock_scouter_bot",
       label: "https://t.me/stock_scouter_bot",
-    } ,
+    },
     logo: STOCK_SCOUTER_BOT_LOGO,
   },
   {
@@ -36,11 +35,14 @@ export const PROJECTS_DETAILS = [
       frontend: "HTML, CSS, JavaScript",
       backend: "Python",
     },
+    link: {
+        href: "https://github.com/ngfenglong/Predicting-Spotify-Top-100-Hits",
+    },
     github: [
       {
         href: "https://github.com/ngfenglong/Predicting-Spotify-Top-100-Hits",
         label: "Predicting-Spotify-Top-100-Hits",
-      }
+      },
     ],
     telegram: {},
     logo: SPOTIFY_TOP_100_LOGO,
@@ -111,7 +113,8 @@ export const PROJECTS_DETAILS = [
       {
         href: "https://github.com/ngfenglong/food-randomizer-bot",
         label: "Food-randomizer-bot-repo",
-      },  {
+      },
+      {
         href: "https://github.com/ngfenglong/food-randomizer-BE",
         label: "Food-randomizer-API",
       },
@@ -141,5 +144,4 @@ export const PROJECTS_DETAILS = [
     telegram: {},
     logo: GO_SCRAPE_FLOW_LOGO,
   },
- 
 ];
