@@ -7,7 +7,7 @@ export const WORK_EXPERIENCE_DETAILS = [
       {
         title: ['Lead Software Developer/ ', 'Software Engineering Specialist'],
         start_date: 'Jun 2024',
-        end_date: 'Present',
+        end_date: 'Jul 2025',
       },
       {
         title: ['Senior Software Developer/','Business Arch Senior Analyst'],
