@@ -1,6 +1,16 @@
-import { ACCENTURE_LOGO, GIC_LOGO, NUS_LOGO } from './assets';
+import { ACCENTURE_LOGO, GIC_LOGO, NUS_LOGO, TRAVELOKA_LOGO } from './assets';
 
 export const WORK_EXPERIENCE_DETAILS = [
+  {
+    companyName: 'Traveloka',
+    roles: [
+      {
+        title: ['Software Engineer (Backend)'],
+        start_date: 'Jul 2025',
+        end_date: 'Present',
+      },    ],
+    logo: TRAVELOKA_LOGO,
+  },
   {
     companyName: 'Accenture',
     roles: [

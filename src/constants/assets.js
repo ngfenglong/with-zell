@@ -11,6 +11,7 @@ export const STOCK_SCOUTER_BOT_LOGO = '/images/project-logos/StockScouterBot.jpg
 
 
 // Company Logo
+export const TRAVELOKA_LOGO = '/images/company-logos/traveloka.png';
 export const ACCENTURE_LOGO = '/images/company-logos/accenture.jpeg';
 export const NUS_LOGO = '/images/company-logos/nus.jpeg';
 export const GIC_LOGO = '/images/company-logos/gic.jpeg';
