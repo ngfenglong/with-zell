@@ -1,9 +1,16 @@
 {
     "compilerOptions": {
-      "baseUrl": ".",
-      "paths": {
-        "@/*": ["src/*"]
-      }
-    }
+      "target": "ESNext",
+      "module": "ESNext",
+      "jsx": "preserve",
+      "moduleResolution": "Node",
+      "resolveJsonModule": true,
+      "allowJs": true,
+        "baseUrl": ".",
+        "paths": {
+          "@/*": ["src/*"]
+        }
+    },
+    "include": ["**/*.js", "**/*.jsx", "next-env.d.ts"],
+    "exclude": ["node_modules"]
 } 
-   

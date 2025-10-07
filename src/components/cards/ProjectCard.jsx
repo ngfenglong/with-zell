@@ -66,7 +66,7 @@ const ProjectCard = ({ project }) => {
             <span className="ml-2">{project.telegram.label}</span>
           </Link>
         )}
-        {project.github.map((githubLink) => {
+        {project.github?.map((githubLink) => {
           return (
             <Link
               key={githubLink.href}
