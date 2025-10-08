@@ -32,8 +32,8 @@ export const PROJECTS_DETAILS = [
     description:
       "A classical machine learning project predicting whether a song will appear in Spotify's Top 100 chart. The project includes data preprocessing, feature engineering, model selection, and deployment as a web application.",
     technology: {
-      frontend: "HTML, CSS, JavaScript",
       backend: "Python",
+      database: "Machine Learning",
     },
     link: {
         href: "https://github.com/ngfenglong/Predicting-Spotify-Top-100-Hits",
