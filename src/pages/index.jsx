@@ -135,7 +135,7 @@ const HomePage = ({ articlesProp }) => {
                 Products
               </h3>
               <p className="text-gray-600">
-               Software I'm building to solve problems I care about. From idea to production.
+               Software I&apos;m building to solve problems I care about. From idea to production.
               </p>
             </Link>
             <Link
