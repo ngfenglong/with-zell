@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import Seo from '@/components/seo/Seo';
 import Container from '../../components/container/Container';
 import SocialLink from '../../components/social-link/SocialLink';
 import {
@@ -14,11 +14,12 @@ import { ABOUT_PICTURE } from '../../constants/assets';
 import Image from 'next/image';
 
 const AboutPage = () => {
-  useEffect(() => {
-    document.title = 'WithZell - Technologist, Dancer, and Lifelong Learner';
-  }, []);
   return (
     <>
+      <Seo
+        title="About"
+        description="Zell (Ng Feng Long) is a software engineer from Singapore. How he got into tech, what he works on, and what keeps him curious."
+      />
       <Container className="mt-16 sm:mt-32">
         <div className="grid grid-cols-1 gap-y-16 lg:grid-cols-2 lg:grid-rows-[auto_1fr] lg:gap-y-12">
           <div className="lg:pl-20">
