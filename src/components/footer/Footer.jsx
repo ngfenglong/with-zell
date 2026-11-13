@@ -18,7 +18,7 @@ const Footer = () => {
                 <Link href={ROUTES.RESOURCES}>Resources</Link>
               </div>
               <p className="text-sm text-zinc-400">
-                &copy; {new Date().getFullYear()} With Zell. All rights
+                &copy; {new Date().getFullYear()} WithZell. All rights
                 reserved.
               </p>
             </div>

@@ -1,50 +1,40 @@
-import Container from "../../components/container/Container";
-import { getBlocks, getPage } from "@/util/notion";
-import { Fragment } from "react";
-import { renderBlock } from "@/util/notion-rendering-helper";
+import Container from '@/components/container/Container';
+import Seo from '@/components/seo/Seo';
+import { NotionContent } from '@/components/notion/NotionBlocks';
+import { getBlocks } from '@/util/notion';
 
-const ResourcesPage = ({ page, blocks, dateStr }) => {
+const ResourcesPage = ({ blocks }) => {
   return (
     <>
-      <Container className="pb-12 pt-16">
-        <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-2xl">
-        Resources - A Personal Collection from My Software Engineering Exploration
-        </h1>
-        <article>
-          <section>
-            {blocks.map((block) => (
-              <Fragment key={block.id}>{renderBlock(block)}</Fragment>
-            ))}
-          </section>
-        </article>
+      <Seo
+        title="Resources"
+        description="A personal collection of courses, books and tools from Zell's software engineering journey."
+      />
+      <Container className="mt-16 sm:mt-32">
+        <header className="max-w-2xl">
+          <h1 className="[text-wrap:balance] text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">
+            Resources
+          </h1>
+          <p className="mt-4 text-base text-zinc-600">
+            A personal collection from my software engineering exploration.
+          </p>
+        </header>
+        <NotionContent blocks={blocks} className="mt-12 max-w-2xl" />
       </Container>
     </>
   );
 };
 
-export const getServerSideProps = async () => {
-  const notionSecret = process.env.NOTION_API_KEY;
-  const id = process.env.RESOURCE_PAGE_ID;
-
-  if (!notionSecret || !id) {
-    return {
-      notFound: true,
-    };
+export const getStaticProps = async () => {
+  const pageId = process.env.RESOURCE_PAGE_ID;
+  if (!process.env.NOTION_API_KEY || !pageId) {
+    return { notFound: true };
   }
 
-  const page = await getPage(id);
-  const blocks = await getBlocks(id);
-
-  const created_time = page.created_time;
-  const releasedDate = page.properties?.released_date?.date?.start;
-  const dateStr = releasedDate ?? created_time;
-
+  const blocks = await getBlocks(pageId);
   return {
-    props: {
-      page,
-      blocks,
-      dateStr,
-    },
+    props: { blocks },
+    revalidate: 300,
   };
 };
 

@@ -1,93 +1,122 @@
+import Link from 'next/link';
+import { ArrowLeftIcon } from '@heroicons/react/20/solid';
 import Badge from '@/components/badge/badge';
 import Container from '@/components/container/Container';
+import Seo from '@/components/seo/Seo';
+import { NotionContent } from '@/components/notion/NotionBlocks';
 import { formatDateToString } from '@/util/date-helper';
-import { getBlocks, getPage } from '@/util/notion';
+import { getBlocks, getPage, getPublishedPosts } from '@/util/notion';
 import {
-  Text,
-  getCategoryTags,
-  renderBlock,
+  BlogColumns,
+  getReadingTime,
+  transformNotionArticleToPost,
 } from '@/util/notion-rendering-helper';
-import { ArrowLeftIcon } from '@heroicons/react/20/solid';
-import { useRouter } from 'next/router';
-import { Fragment } from 'react';
+import * as ROUTES from '@/constants/routes';
 
-const BlogDetailPage = ({ page, blocks, dateStr }) => {
-  const router = useRouter();
-  const tags = getCategoryTags(page.properties);
+// Re-fetch from Notion at most every 5 minutes. Kept well under the
+// ~1 hour lifetime of Notion's signed file URLs.
+const REVALIDATE_SECONDS = 300;
+
+const BlogDetailPage = ({ post, blocks, readingTime }) => {
   return (
-    <Container className="mt-16 lg:mt-24">
-      <div className="xl:relative">
+    <>
+      <Seo
+        title={post.title}
+        description={post.description || undefined}
+        image={post.cover ?? undefined}
+        type="article"
+        publishedTime={post.posted_date}
+      />
+      <Container className="mt-16 lg:mt-24">
         <div className="mx-auto max-w-2xl">
-          <button
-            type="button"
-            onClick={() => router.back()}
-            aria-label="Go back to blogs"
-            className="group mb-8 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 transition lg:absolute lg:-left-5 lg:-mt-2 lg:mb-0 xl:-top-1.5 xl:left-0 xl:mt-0"
+          <Link
+            href={ROUTES.BLOGS}
+            className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-500 transition hover:text-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-500"
           >
-            <ArrowLeftIcon className="h-4 w-4 stroke-zinc-500 transition group-hover:stroke-zinc-700 " />
-          </button>
+            <ArrowLeftIcon
+              className="h-4 w-4 transition group-hover:-translate-x-0.5"
+              aria-hidden="true"
+            />
+            All writing
+          </Link>
 
-          <article>
+          <article className="mt-10">
             <header className="flex flex-col">
-              <h1 className="mt-6 text-3xl font-bold tracking-tight text-zinc-800 sm:text-2xl">
-                <Text text={page.properties.post.title} />
+              <p className="flex items-center gap-3 text-sm text-zinc-500">
+                <time dateTime={post.posted_date}>
+                  {formatDateToString(post.posted_date)}
+                </time>
+                <span aria-hidden="true" className="h-1 w-1 rounded-full bg-zinc-300" />
+                <span>{readingTime} min read</span>
+              </p>
+              <h1 className="mt-4 [text-wrap:balance] text-4xl font-bold tracking-tight text-zinc-900 sm:text-5xl">
+                {post.title}
               </h1>
-              <div className="my-4 flex gap-1 transition">
-                {tags.map((tag, id) => (
-                  <Badge
-                    key={tag.text + id}
-                    color={tag.color}
-                    text={tag?.text}
-                  ></Badge>
-                ))}
-              </div>
-
-              <time
-                dateTime={new Date(dateStr)}
-                className="order-first flex items-center text-base text-zinc-400 "
-              >
-                <span className="h-4 w-0.5 rounded-full bg-zinc-200" />
-                <span className="ml-3">
-                  {formatDateToString(new Date(dateStr))}
-                </span>
-              </time>
+              {post.description && (
+                <p className="mt-5 text-lg text-zinc-600">{post.description}</p>
+              )}
+              {post.tags.length > 0 && (
+                <ul className="mt-6 flex flex-wrap gap-1.5" aria-label="Tags">
+                  {post.tags.map((tag) => (
+                    <li key={tag.text}>
+                      <Badge color={tag.color} text={tag.text} />
+                    </li>
+                  ))}
+                </ul>
+              )}
             </header>
-            <section>
-              {blocks.map((block) => (
-                <Fragment key={block.id}>{renderBlock(block)}</Fragment>
-              ))}
-            </section>
+
+            <NotionContent blocks={blocks} className="mt-12" />
           </article>
         </div>
-      </div>
-    </Container>
+      </Container>
+    </>
   );
 };
 
-export const getServerSideProps = async ({ params }) => {
-  const notionSecret = process.env.NOTION_API_KEY;
-  const id = params.id;
+export const getStaticPaths = async () => {
+  const databaseId = process.env.NOTION_DATABASE;
+  if (!databaseId || !process.env.NOTION_API_KEY) {
+    return { paths: [], fallback: 'blocking' };
+  }
+  const posts = await getPublishedPosts(databaseId);
+  return {
+    paths: posts.map((post) => ({ params: { id: post.id } })),
+    fallback: 'blocking',
+  };
+};
 
-  if (!notionSecret || !id) {
-    return {
-      notFound: true,
-    };
+export const getStaticProps = async ({ params }) => {
+  if (!process.env.NOTION_API_KEY || !params?.id) {
+    return { notFound: true };
   }
 
-  const page = await getPage(id);
-  const blocks = await getBlocks(id);
+  try {
+    const page = await getPage(params.id);
+    const databaseId = process.env.NOTION_DATABASE?.replaceAll('-', '');
+    const parentId = page.parent?.database_id?.replaceAll('-', '');
+    const isPublished = page.properties?.[BlogColumns.PUBLIC]?.checkbox === true;
 
-  const created_time = page.created_time;
-  const releasedDate = page.properties?.released_date?.date?.start;
-  const dateStr = releasedDate ?? created_time;
+    // Only serve published posts from the blog database.
+    if (!isPublished || (databaseId && parentId !== databaseId)) {
+      return { notFound: true, revalidate: REVALIDATE_SECONDS };
+    }
 
-  return {
-    props: {
-      page,
-      blocks,
-      dateStr,
-    },
-  };
+    const blocks = await getBlocks(page.id);
+    return {
+      props: {
+        post: transformNotionArticleToPost(page),
+        blocks,
+        readingTime: getReadingTime(blocks),
+      },
+      revalidate: REVALIDATE_SECONDS,
+    };
+  } catch (error) {
+    if (error?.status === 404 || error?.code === 'validation_error') {
+      return { notFound: true, revalidate: REVALIDATE_SECONDS };
+    }
+    throw error;
+  }
 };
 
 export default BlogDetailPage;

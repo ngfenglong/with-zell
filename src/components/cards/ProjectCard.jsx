@@ -40,8 +40,9 @@ const ProjectCard = ({ project }) => {
           <Image
             src={project.logo}
             alt=""
-            className="h-8 w-8"
-            fill
+            width={32}
+            height={32}
+            className="h-8 w-8 rounded-full object-contain"
             unoptimized
           />
         </div>
