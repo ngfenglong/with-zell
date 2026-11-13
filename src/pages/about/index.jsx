@@ -34,7 +34,7 @@ const AboutPage = () => {
             </div>
           </div>
           <div className="lg:order-first lg:row-span-2">
-            <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-2xl">
+            <h1 className="text-3xl font-bold tracking-tight text-zinc-900 sm:text-4xl">
               I&apos;m Zell (Feng Long), from Singapore.
             </h1>
             <div className="mt-6 space-y-7 text-base text-zinc-600">
