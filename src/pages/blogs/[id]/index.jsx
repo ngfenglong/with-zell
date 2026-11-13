@@ -2,14 +2,10 @@ import Badge from '@/components/badge/badge';
 import Container from '@/components/container/Container';
 import { formatDateToString } from '@/util/date-helper';
 import { getBlocks, getPage } from '@/util/notion';
-import {
-  Text,
-  getCategoryTags,
-  renderBlock,
-} from '@/util/notion-rendering-helper';
+import { getCategoryTags } from '@/util/notion-rendering-helper';
+import { NotionContent } from '@/components/notion/NotionBlocks';
 import { ArrowLeftIcon } from '@heroicons/react/20/solid';
 import { useRouter } from 'next/router';
-import { Fragment } from 'react';
 
 const BlogDetailPage = ({ page, blocks, dateStr }) => {
   const router = useRouter();
@@ -30,7 +26,7 @@ const BlogDetailPage = ({ page, blocks, dateStr }) => {
           <article>
             <header className="flex flex-col">
               <h1 className="mt-6 text-3xl font-bold tracking-tight text-zinc-800 sm:text-2xl">
-                <Text text={page.properties.post.title} />
+                {page.properties.post.title.map((t) => t.plain_text).join('')}
               </h1>
               <div className="my-4 flex gap-1 transition">
                 {tags.map((tag, id) => (
@@ -52,11 +48,7 @@ const BlogDetailPage = ({ page, blocks, dateStr }) => {
                 </span>
               </time>
             </header>
-            <section>
-              {blocks.map((block) => (
-                <Fragment key={block.id}>{renderBlock(block)}</Fragment>
-              ))}
-            </section>
+            <NotionContent blocks={blocks} className="mt-8" />
           </article>
         </div>
       </div>

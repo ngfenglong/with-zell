@@ -1,7 +1,6 @@
 import Container from "../../components/container/Container";
 import { getBlocks, getPage } from "@/util/notion";
-import { Fragment } from "react";
-import { renderBlock } from "@/util/notion-rendering-helper";
+import { NotionContent } from "@/components/notion/NotionBlocks";
 
 const ResourcesPage = ({ page, blocks, dateStr }) => {
   return (
@@ -10,13 +9,7 @@ const ResourcesPage = ({ page, blocks, dateStr }) => {
         <h1 className="text-4xl font-bold tracking-tight text-zinc-800 sm:text-2xl">
         Resources - A Personal Collection from My Software Engineering Exploration
         </h1>
-        <article>
-          <section>
-            {blocks.map((block) => (
-              <Fragment key={block.id}>{renderBlock(block)}</Fragment>
-            ))}
-          </section>
-        </article>
+        <NotionContent blocks={blocks} className="mt-8 max-w-2xl" />
       </Container>
     </>
   );

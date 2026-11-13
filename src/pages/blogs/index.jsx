@@ -18,7 +18,7 @@ const BlogPage = ({ articlesProp }) => {
     const mappedArticles = articlesProp
       .map((article) => transformNotionArticleToPost(article))
       .sort((a, b) => {
-        return b.posted_date - a.posted_date;
+        return b.posted_date.localeCompare(a.posted_date);
       });
     setArticles(mappedArticles);
     setIsLoading(false);
