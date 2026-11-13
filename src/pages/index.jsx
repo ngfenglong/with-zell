@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import { Container } from "@/components/container/Container";
 import SocialLink from "@/components/social-link/SocialLink";
 import {
@@ -13,7 +12,8 @@ import PageIntro from "@/components/page-intro/PageIntro";
 import ResumeCard from "@/components/cards/ResumeCard";
 import PictureGallery from "@/components/picture-gallery/PictureGallery";
 import { ArticleCard } from "@/components/cards/ArticleCard";
-import { Client } from "@notionhq/client";
+import Seo from "@/components/seo/Seo";
+import { getPublishedPosts } from "@/util/notion";
 import { WORK_EXPERIENCE_DETAILS } from "@/constants/work-experience-details";
 import { EDUCATION_DETAILS } from "@/constants/education-details";
 import { GALLERY_PICTURES } from "@/constants/pictures-gallery-details";
@@ -26,22 +26,10 @@ const WORK_EXPERIENCE = WORK_EXPERIENCE_DETAILS;
 const EDUCATION_EXPERIENCE = EDUCATION_DETAILS;
 const PICTURES = GALLERY_PICTURES;
 
-const HomePage = ({ articlesProp }) => {
-  const [articles, setArticles] = useState([]);
-  useEffect(() => {
-    document.title =
-      "WithZell - Software Developer, Dance Enthusiast, and Lifelong Learner";
-
-    const mappedArticles = articlesProp
-      .map((article) => transformNotionArticleToPost(article))
-      .sort((a, b) => {
-        return b.posted_date.localeCompare(a.posted_date);
-      });
-    setArticles(mappedArticles);
-  }, [articlesProp]);
-
+const HomePage = ({ articles }) => {
   return (
     <>
+      <Seo />
       <Container className="mt-8">
         <PageIntro
           title="Software Developer, Dancer, and Lifelong Learner."
@@ -91,15 +79,15 @@ const HomePage = ({ articlesProp }) => {
         <div className="mx-auto grid max-w-6xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
           <div className="flex flex-col lg:-mr-10">
             <div className="flex items-start justify-between mb-8">
-              <h2 className="text-3xl font-bold text-gray-900">
+              <h2 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl">
                 Recent Writing
               </h2>
               <Link
                 href="/blogs"
-                className="flex items-center gap-2 font-medium text-gray-600 transition-colors hover:text-gray-900"
+                className="flex items-center gap-2 text-sm font-medium text-zinc-600 transition-colors hover:text-teal-600"
               >
                 View all posts
-                <ArrowRight size={20} />
+                <ArrowRight size={16} aria-hidden="true" />
               </Link>
             </div>
 
@@ -112,7 +100,7 @@ const HomePage = ({ articlesProp }) => {
               <div className="flex justify-center mt-8">
                 <Link
                   href="/blogs"
-                  className="rounded-full bg-zinc-100 px-6 py-3 text-sm font-medium text-zinc-900 transition hover:bg-zinc-200"
+                  className="rounded-full bg-zinc-100 px-6 py-3 text-sm font-medium text-zinc-900 transition hover:bg-zinc-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
                 >
                   View All Posts
                 </Link>
@@ -124,28 +112,27 @@ const HomePage = ({ articlesProp }) => {
             <ResumeCard title="Education" resume={EDUCATION_EXPERIENCE} />
           </div>
         </div>
-        <section className="border-t border-gray-200 mt-16 pt-16">
-          
+        <section className="mt-16 border-t border-zinc-100 pt-16">
           <div className="grid gap-6 md:grid-cols-2">
             <Link
               href={ROUTES.PRODUCTS}
-              className="rounded-lg border border-gray-200 p-6 transition-all hover:border-gray-300 hover:shadow-sm"
+              className="rounded-2xl border border-zinc-100 p-6 transition hover:border-zinc-200 hover:bg-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
             >
-              <h3 className="mb-2 text-xl font-semibold text-gray-900">
+              <h3 className="mb-2 text-lg font-semibold text-zinc-900">
                 Products
               </h3>
-              <p className="text-gray-600">
+              <p className="text-sm text-zinc-600">
                Software I&apos;m building to solve problems I care about. From idea to production.
               </p>
             </Link>
             <Link
               href={ROUTES.PROJECTS}
-              className="rounded-lg border border-gray-200 p-6 transition-all hover:border-gray-300 hover:shadow-sm"
+              className="rounded-2xl border border-zinc-100 p-6 transition hover:border-zinc-200 hover:bg-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
             >
-              <h3 className="mb-2 text-xl font-semibold text-gray-900">
+              <h3 className="mb-2 text-lg font-semibold text-zinc-900">
                 Projects
               </h3>
-              <p className="text-gray-600">
+              <p className="text-sm text-zinc-600">
                 Side projects and technical experiments where I explore new ideas and technologies.
               </p>
             </Link>
@@ -157,31 +144,20 @@ const HomePage = ({ articlesProp }) => {
 };
 
 export async function getStaticProps() {
-  const notionDatabaseId = process.env.NOTION_DATABASE;
-  const notionSecret = process.env.NOTION_API_KEY;
-
-  if (!notionDatabaseId || !notionSecret) {
-    return {
-      notFound: true,
-    };
+  const databaseId = process.env.NOTION_DATABASE;
+  if (!databaseId || !process.env.NOTION_API_KEY) {
+    return { notFound: true };
   }
 
-  const notion = new Client({
-    auth: notionSecret,
-  });
-
-  const query = await notion.databases.query({
-    database_id: notionDatabaseId,
-    // sort by the most recently created posts
-    sorts: [{ property: "created", direction: "descending" }],
-    filter: { property: "public", checkbox: { equals: true } },
-  });
+  const posts = await getPublishedPosts(databaseId);
+  const articles = posts
+    .map(transformNotionArticleToPost)
+    .sort((a, b) => b.posted_date.localeCompare(a.posted_date))
+    .slice(0, 4);
 
   return {
-    props: {
-      articlesProp: query?.results ?? [],
-    },
-    revalidate: 1,
+    props: { articles },
+    revalidate: 300,
   };
 }
 
