@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ArrowLeftIcon } from '@heroicons/react/20/solid';
-import Badge from '@/components/badge/badge';
+import { TagList } from '@/components/tag/Tag';
 import Container from '@/components/container/Container';
 import Seo from '@/components/seo/Seo';
 import { NotionContent } from '@/components/notion/NotionBlocks';
@@ -55,15 +55,12 @@ const BlogDetailPage = ({ post, blocks, readingTime }) => {
               {post.description && (
                 <p className="mt-5 text-lg text-zinc-600">{post.description}</p>
               )}
-              {post.tags.length > 0 && (
-                <ul className="mt-6 flex flex-wrap gap-1.5" aria-label="Tags">
-                  {post.tags.map((tag) => (
-                    <li key={tag.text}>
-                      <Badge color={tag.color} text={tag.text} />
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <TagList
+                items={post.tags.map((tag) => tag.text)}
+                max={4}
+                label="Topics"
+                className="mt-6"
+              />
             </header>
 
             <NotionContent blocks={blocks} className="mt-12" />
