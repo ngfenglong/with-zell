@@ -11,6 +11,12 @@ const nextConfig = {
   },
   // The Geist font package ships untranspiled ESM.
   transpilePackages: ['geist'],
+  async redirects() {
+    return [
+      // Products now live in the "What I'm building" section of /projects.
+      { source: '/products', destination: '/projects#building', permanent: true },
+    ];
+  },
 }
 
 const withMDX = nextMDX({

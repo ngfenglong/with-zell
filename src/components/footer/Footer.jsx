@@ -13,7 +13,6 @@ const Footer = () => {
                 <Link href={ROUTES.HOME}>Home</Link>
                 <Link href={ROUTES.ABOUT}>About</Link>
                 <Link href={ROUTES.PROJECTS}>Projects</Link>
-                <Link href={ROUTES.PRODUCTS}>Products</Link>
                 <Link href={ROUTES.BLOGS}>Blogs</Link>
                 <Link href={ROUTES.RESOURCES}>Resources</Link>
               </div>
