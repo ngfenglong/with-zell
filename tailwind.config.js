@@ -1,7 +1,14 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx,mdx}'],
   theme: {
+    extend: {
+      fontFamily: {
+        sans: ['var(--font-geist-sans)', ...defaultTheme.fontFamily.sans],
+      },
+    },
     fontSize: {
       xxxs: ['.625rem', { lineHeight: '1rem' }],
       xxs: ['.75rem', { lineHeight: '1.25rem' }],
@@ -48,14 +55,14 @@ module.exports = {
         css: {
           '--tw-prose-body': theme('colors.zinc.600'),
           '--tw-prose-headings': theme('colors.zinc.900'),
-          '--tw-prose-links': theme('colors.teal.500'),
-          '--tw-prose-links-hover': theme('colors.teal.600'),
-          '--tw-prose-underline': theme('colors.teal.500 / 0.2'),
-          '--tw-prose-underline-hover': theme('colors.teal.500'),
+          '--tw-prose-links': theme('colors.teal.700'),
+          '--tw-prose-links-hover': theme('colors.teal.800'),
+          '--tw-prose-underline': theme('colors.teal.700 / 0.3'),
+          '--tw-prose-underline-hover': theme('colors.teal.700'),
           '--tw-prose-bold': theme('colors.zinc.900'),
           '--tw-prose-counters': theme('colors.zinc.900'),
           '--tw-prose-bullets': theme('colors.zinc.900'),
-          '--tw-prose-hr': theme('colors.zinc.100'),
+          '--tw-prose-hr': theme('colors.zinc.200'),
           '--tw-prose-quote-borders': theme('colors.zinc.200'),
           '--tw-prose-captions': theme('colors.zinc.400'),
           '--tw-prose-code': theme('colors.zinc.700'),
@@ -90,12 +97,12 @@ module.exports = {
           color: 'var(--tw-prose-body)',
           lineHeight: theme('lineHeight.7'),
           '> *': {
-            marginTop: theme('spacing.10'),
-            marginBottom: theme('spacing.10'),
+            marginTop: theme('spacing.8'),
+            marginBottom: theme('spacing.8'),
           },
           p: {
-            marginTop: theme('spacing.7'),
-            marginBottom: theme('spacing.7'),
+            marginTop: theme('spacing.5'),
+            marginBottom: theme('spacing.5'),
           },
 
           // Headings
@@ -106,14 +113,14 @@ module.exports = {
           h2: {
             fontSize: theme('fontSize.xl')[0],
             lineHeight: theme('lineHeight.7'),
-            marginTop: theme('spacing.20'),
+            marginTop: theme('spacing.14'),
             marginBottom: theme('spacing.4'),
           },
           h3: {
             fontSize: theme('fontSize.base')[0],
             lineHeight: theme('lineHeight.7'),
-            marginTop: theme('spacing.16'),
-            marginBottom: theme('spacing.4'),
+            marginTop: theme('spacing.10'),
+            marginBottom: theme('spacing.3'),
           },
           ':is(h2, h3) + *': {
             marginTop: 0,
@@ -143,15 +150,18 @@ module.exports = {
             fontWeight: theme('fontWeight.semibold'),
           },
           code: {
-            display: 'inline-block',
+            display: 'inline',
             color: 'var(--tw-prose-code)',
             fontSize: theme('fontSize.sm')[0],
             fontWeight: theme('fontWeight.semibold'),
             backgroundColor: 'var(--tw-prose-code-bg)',
-            borderRadius: theme('borderRadius.lg'),
+            borderRadius: theme('borderRadius.md'),
             paddingLeft: theme('spacing.1'),
             paddingRight: theme('spacing.1'),
+            boxDecorationBreak: 'clone',
           },
+          'code::before': { content: 'none' },
+          'code::after': { content: 'none' },
           'a code': {
             color: 'inherit',
           },
@@ -189,8 +199,8 @@ module.exports = {
             paddingLeft: theme('spacing.6'),
           },
           li: {
-            marginTop: theme('spacing.6'),
-            marginBottom: theme('spacing.6'),
+            marginTop: theme('spacing.2'),
+            marginBottom: theme('spacing.2'),
             paddingLeft: theme('spacing[3.5]'),
           },
           'li::marker': {
@@ -218,8 +228,8 @@ module.exports = {
             fontSize: theme('fontSize.sm')[0],
             fontWeight: theme('fontWeight.medium'),
             backgroundColor: 'var(--tw-prose-pre-bg)',
-            borderRadius: theme('borderRadius.3xl'),
-            padding: theme('spacing.8'),
+            borderRadius: theme('borderRadius.2xl'),
+            padding: theme('spacing.6'),
             overflowX: 'auto',
             border: '1px solid',
             borderColor: 'var(--tw-prose-pre-border)',
@@ -236,14 +246,10 @@ module.exports = {
 
           // Horizontal rules
           hr: {
-            marginTop: theme('spacing.20'),
-            marginBottom: theme('spacing.20'),
+            marginTop: theme('spacing.12'),
+            marginBottom: theme('spacing.12'),
             borderTopWidth: '1px',
             borderColor: 'var(--tw-prose-hr)',
-            '@screen lg': {
-              marginLeft: `calc(${theme('spacing.12')} * -1)`,
-              marginRight: `calc(${theme('spacing.12')} * -1)`,
-            },
           },
 
           // Tables
@@ -300,5 +306,5 @@ module.exports = {
       },
     }),
   },
-  plugins: [],
+  plugins: [require('@tailwindcss/typography')],
 };

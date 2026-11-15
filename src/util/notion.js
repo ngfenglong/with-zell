@@ -4,69 +4,90 @@ const notion = new Client({
   auth: process.env.NOTION_API_KEY,
 });
 
-const getRandomInt = (min, max) => {
-  min = Math.ceil(min);
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min + 1)) + min;
-}
-
-export const getDatabase = async (databaseId, filterOptions = {}) => {
-  const response = await notion.databases.query({
-    database_id: databaseId,
-    ...filterOptions,
-  });
-  return response.results;
+/** Query every row of a database, following Notion's pagination. */
+export const getDatabase = async (databaseId, queryOptions = {}) => {
+  const results = [];
+  let cursor;
+  do {
+    const response = await notion.databases.query({
+      database_id: databaseId,
+      start_cursor: cursor,
+      ...queryOptions,
+    });
+    results.push(...response.results);
+    cursor = response.has_more ? response.next_cursor : undefined;
+  } while (cursor);
+  return results;
 };
 
-export const getPage = async (pageId) => {
-  const response = await notion.pages.retrieve({ page_id: pageId });
-  return response;
-};
-
-export const getBlocks = async (blockId, pageSize = 100) => {
-  blockId = blockId.replaceAll('-', '');
-
-  const { results } = await notion.blocks.children.list({
-    block_id: blockId,
-    page_size: pageSize,
+/** Published posts, newest first. */
+export const getPublishedPosts = (databaseId) =>
+  getDatabase(databaseId, {
+    sorts: [{ property: 'created', direction: 'descending' }],
+    filter: { property: 'public', checkbox: { equals: true } },
   });
 
-  // Fetches all child blocks recursively - be mindful of rate limits if you have large amounts of nested blocks
-  // See https://developers.notion.com/docs/working-with-page-content#reading-nested-blocks
-  const childBlocks = results.map(async (block) => {
-    if (block.has_children) {
+export const getPage = (pageId) => notion.pages.retrieve({ page_id: pageId });
+
+export const getBlock = (blockId) =>
+  notion.blocks.retrieve({ block_id: blockId });
+
+const listAllChildren = async (blockId) => {
+  const results = [];
+  let cursor;
+  do {
+    const response = await notion.blocks.children.list({
+      block_id: blockId,
+      page_size: 100,
+      start_cursor: cursor,
+    });
+    results.push(...response.results);
+    cursor = response.has_more ? response.next_cursor : undefined;
+  } while (cursor);
+  return results;
+};
+
+const LIST_ITEM_TO_LIST = {
+  bulleted_list_item: 'bulleted_list',
+  numbered_list_item: 'numbered_list',
+};
+
+/**
+ * Notion returns list items as siblings; wrap consecutive items of the same
+ * kind in a synthetic list block so they render as one <ul>/<ol>.
+ */
+const groupListItems = (blocks) =>
+  blocks.reduce((acc, block) => {
+    const listType = LIST_ITEM_TO_LIST[block.type];
+    if (!listType) {
+      acc.push(block);
+      return acc;
+    }
+    const previous = acc[acc.length - 1];
+    if (previous?.type === listType) {
+      previous[listType].children.push(block);
+    } else {
+      acc.push({
+        id: `${block.id}-list`,
+        type: listType,
+        [listType]: { children: [block] },
+      });
+    }
+    return acc;
+  }, []);
+
+/**
+ * Fetch every block of a page (all pages of results, all nesting levels).
+ * Nested children are attached as `block.children`.
+ */
+export const getBlocks = async (blockId) => {
+  const blocks = await listAllChildren(blockId);
+  const withChildren = await Promise.all(
+    blocks.map(async (block) => {
+      if (!block.has_children || block.type === 'child_page') return block;
       const children = await getBlocks(block.id);
       return { ...block, children };
-    }
-    return block;
-  });
-
-  return await Promise.all(childBlocks).then((blocks) => {
-    return blocks.reduce((acc, curr) => {
-      if (curr.type === 'bulleted_list_item') {
-        if (acc[acc.length - 1]?.type === 'bulleted_list') {
-          acc[acc.length - 1][acc[acc.length - 1].type].children?.push(curr);
-        } else {
-          acc.push({
-            id: getRandomInt(10 ** 99, 10 ** 100).toString(),
-            type: 'bulleted_list',
-            bulleted_list: { children: [curr] },
-          });
-        }
-      } else if (curr.type === 'numbered_list_item') {
-        if (acc[acc.length - 1]?.type === 'numbered_list') {
-          acc[acc.length - 1][acc[acc.length - 1].type].children?.push(curr);
-        } else {
-          acc.push({
-            id: getRandomInt(10 ** 99, 10 ** 100).toString(),
-            type: 'numbered_list',
-            numbered_list: { children: [curr] },
-          });
-        }
-      } else {
-        acc.push(curr);
-      }
-      return acc;
-    }, []);
-  });
+    })
+  );
+  return groupListItems(withChildren);
 };
