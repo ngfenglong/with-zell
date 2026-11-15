@@ -31,7 +31,7 @@ const BlogDetailPage = ({ post, blocks, readingTime }) => {
         <div className="mx-auto max-w-2xl">
           <Link
             href={ROUTES.BLOGS}
-            className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-500 transition hover:text-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-500"
+            className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-500 transition hover:text-teal-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-500"
           >
             <ArrowLeftIcon
               className="h-4 w-4 transition group-hover:-translate-x-0.5"
