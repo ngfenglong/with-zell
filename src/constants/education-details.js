@@ -5,7 +5,7 @@ export const EDUCATION_DETAILS = [
     companyName: 'Nanyang Polytechnic',
     roles: [
       {
-        title: ['Sepcialist Diploma in Applied Artificial Intelligence'],
+        title: ['Specialist Diploma in Applied Artificial Intelligence'],
         start_date: 'Apr 2024',
         end_date: 'Mar 2025',
       }],

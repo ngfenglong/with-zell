@@ -1,85 +1,47 @@
-import Link from 'next/link';
-import { GlobeAltIcon } from '@heroicons/react/20/solid';
-import { GitHubIcon, TelegramIcon } from '../social-link/Icons';
-import Image from 'next/image';
-import Badge from '../badge/badge';
+import clsx from "clsx";
+import { TagList } from "@/components/tag/Tag";
+import {
+  CardTitleLink,
+  ProjectActions,
+  ProjectLogo,
+  ProjectMeta,
+  primaryLink,
+} from "./project-parts";
 
-const TechnologyCard = ({ technology }) => {
-  return (
-    <div className="my-4 flex flex-row gap-1">
-      {Object.entries(technology).map(([key, value]) => {
-        let color;
-        switch (key) {
-          case 'frontend':
-            color = 'amber';
-            break;
-          case 'backend':
-            color = 'blue';
-            break;
-          case 'automation':
-            color = 'green';
-            break;
-          case 'database':
-            color = 'gray';
-            break;
-          default:
-            color = 'gray';
-            break;
-        }
-        return <Badge key={key} text={value} color={color} />;
-      })}
-    </div>
-  );
-};
-
+/** Compact card for the Projects grid. */
 const ProjectCard = ({ project }) => {
+  const linked = Boolean(primaryLink(project.links));
   return (
-    <div className="rounded px-4 py-4 hover:bg-slate-100">
-      <Link href={project.link.href}>
-        <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-full bg-white shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 ">
-          <Image
-            src={project.logo}
-            alt=""
-            className="h-8 w-8"
-            fill
-            unoptimized
-          />
-        </div>
-        <h2 className="mt-6 text-base font-semibold text-zinc-800">
-          <span className="relative z-10">{project.name}</span>
-        </h2>
-        <p className="relative z-10 mt-2 text-sm text-zinc-600">
-          {project.description}
-        </p>
-      </Link>
-      {project.technology && <TechnologyCard technology={project.technology} />}
-      <p className="relative z-10 mt-6 flex flex-col gap-1 text-sm font-medium text-zinc-400 transition">
-        {project.link?.label && (
-          <Link className="flex flex-row items-center" href={project.link.href}>
-            <GlobeAltIcon className="h-6 w-6 flex-none" />
-            <span className="ml-2">{project.link.label}</span>
-          </Link>
-        )}
-        {project.telegram?.label && (
-          <Link className="flex flex-row items-center" href={project.telegram.href}>
-            <TelegramIcon className="h-6 w-6 flex-none" />
-            <span className="ml-2">{project.telegram.label}</span>
-          </Link>
-        )}
-        {project.github?.map((githubLink) => {
-          return (
-            <Link
-              key={githubLink.href}
-              className="flex flex-row items-center"
-              href={githubLink.href}
-            >
-              <GitHubIcon className="h-6 w-6 flex-none" />
-              <span className="ml-2">{githubLink.label}</span>
-            </Link>
-          );
-        })}
-      </p>
-    </div>
+    <article
+      className={clsx(
+        "group relative -mx-4 flex gap-4 rounded-2xl p-4 transition duration-200 ease-out",
+        linked &&
+          "focus-within:ring-2 focus-within:ring-teal-500 hover:bg-white hover:shadow-[0_0_0_1px_rgba(24,24,27,0.06),0_12px_28px_-14px_rgba(24,24,27,0.14)]"
+      )}
+    >
+      <ProjectLogo project={project} />
+      <div className="min-w-0 flex-1">
+        <h3
+          className={clsx(
+            "text-base font-semibold text-zinc-900 transition",
+            linked && "group-hover:text-teal-700"
+          )}
+        >
+          <CardTitleLink href={primaryLink(project.links)?.href}>
+            {project.name}
+          </CardTitleLink>
+        </h3>
+        <ProjectMeta project={project} className="mt-0.5" />
+        <p className="mt-2 text-sm leading-6 text-zinc-600">{project.pitch}</p>
+        <TagList
+          items={project.stack}
+          max={3}
+          label="Built with"
+          className="mt-3"
+        />
+        <ProjectActions links={project.links} className="mt-4" />
+      </div>
+    </article>
   );
 };
 

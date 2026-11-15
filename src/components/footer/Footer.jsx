@@ -13,12 +13,11 @@ const Footer = () => {
                 <Link href={ROUTES.HOME}>Home</Link>
                 <Link href={ROUTES.ABOUT}>About</Link>
                 <Link href={ROUTES.PROJECTS}>Projects</Link>
-                <Link href={ROUTES.PRODUCTS}>Products</Link>
                 <Link href={ROUTES.BLOGS}>Blogs</Link>
                 <Link href={ROUTES.RESOURCES}>Resources</Link>
               </div>
               <p className="text-sm text-zinc-400">
-                &copy; {new Date().getFullYear()} With Zell. All rights
+                &copy; {new Date().getFullYear()} WithZell. All rights
                 reserved.
               </p>
             </div>
