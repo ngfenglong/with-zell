@@ -7,14 +7,23 @@ export function formatStringDate(dateString) {
   });
 }
 
-export function formatDateToString(input, offset = 8) {
+/** The same moment shifted to Singapore time (UTC+8), so server and browser agree. */
+function toSingaporeTime(input, offset = 8) {
   const date = input instanceof Date ? input : new Date(input);
-  // set time zone offset for Singapore Standard Time (UTC+8)
   const utc = date.getTime() + date.getTimezoneOffset() * 60000;
-  const formatDate = new Date(utc + 3600000 * offset);
+  return new Date(utc + 3600000 * offset);
+}
 
-  const options = { year: 'numeric', month: 'long', day: 'numeric' };
+/** "September 5, 2022" */
+export function formatDateToString(input, offset = 8) {
+  return toSingaporeTime(input, offset).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
+}
 
-  // format the date in 'September 5, 2022' format
-  return formatDate.toLocaleDateString('en-US', options);
+/** 2022 (in Singapore time, matching the displayed date) */
+export function getYear(input, offset = 8) {
+  return toSingaporeTime(input, offset).getFullYear();
 }
