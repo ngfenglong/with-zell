@@ -8,6 +8,7 @@ export const TRADE_TRACKER_LOGO = '/images/project-logos/trade-tracker.png';
 export const GO_SCRAPE_FLOW_LOGO = '/images/project-logos/goscrapeflow.png';
 export const SPOTIFY_TOP_100_LOGO= '/images/project-logos/Spotify.png'
 export const STOCK_SCOUTER_BOT_LOGO = '/images/project-logos/StockScouterBot.jpg'
+export const FALLOW_LOGO = '/images/project-logos/fallow-logo.png';
 
 
 // Company Logo

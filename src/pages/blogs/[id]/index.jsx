@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { ArrowLeftIcon } from '@heroicons/react/20/solid';
-import Badge from '@/components/badge/badge';
+import { TagList } from '@/components/tag/Tag';
 import Container from '@/components/container/Container';
 import Seo from '@/components/seo/Seo';
 import { NotionContent } from '@/components/notion/NotionBlocks';
@@ -31,7 +31,7 @@ const BlogDetailPage = ({ post, blocks, readingTime }) => {
         <div className="mx-auto max-w-2xl">
           <Link
             href={ROUTES.BLOGS}
-            className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-500 transition hover:text-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-500"
+            className="group inline-flex items-center gap-2 text-sm font-medium text-zinc-500 transition hover:text-teal-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-teal-500"
           >
             <ArrowLeftIcon
               className="h-4 w-4 transition group-hover:-translate-x-0.5"
@@ -55,15 +55,12 @@ const BlogDetailPage = ({ post, blocks, readingTime }) => {
               {post.description && (
                 <p className="mt-5 text-lg text-zinc-600">{post.description}</p>
               )}
-              {post.tags.length > 0 && (
-                <ul className="mt-6 flex flex-wrap gap-1.5" aria-label="Tags">
-                  {post.tags.map((tag) => (
-                    <li key={tag.text}>
-                      <Badge color={tag.color} text={tag.text} />
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <TagList
+                items={post.tags.map((tag) => tag.text)}
+                max={4}
+                label="Topics"
+                className="mt-6"
+              />
             </header>
 
             <NotionContent blocks={blocks} className="mt-12" />

@@ -19,20 +19,32 @@ import { EDUCATION_DETAILS } from "@/constants/education-details";
 import { GALLERY_PICTURES } from "@/constants/pictures-gallery-details";
 import { transformNotionArticleToPost } from "@/util/notion-rendering-helper";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import AppCard from "@/components/cards/AppCard";
+import SectionHeading from "@/components/section-heading/SectionHeading";
+import { getProjectSections } from "@/util/projects";
 import * as ROUTES from "../constants/routes";
 
 const WORK_EXPERIENCE = WORK_EXPERIENCE_DETAILS;
 const EDUCATION_EXPERIENCE = EDUCATION_DETAILS;
 const PICTURES = GALLERY_PICTURES;
 
-const HomePage = ({ articles }) => {
+const sectionLink =
+  "rounded text-sm font-medium text-zinc-600 transition hover:text-teal-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500";
+
+const HomePage = ({ articles, building }) => {
   return (
     <>
       <Seo />
       <Container className="mt-8">
         <PageIntro
-          title="Software Developer, Dancer, and Lifelong Learner."
+          title={
+            <>
+              Software Developer, Dancer, and{" "}
+              <span className="bg-[linear-gradient(transparent_62%,rgba(20,184,166,0.18)_62%)] [box-decoration-break:clone]">
+                Lifelong Learner.
+              </span>
+            </>
+          }
           intro={`I'm Zell (Feng Long), a software developer based in Singapore who believes in
             constant learning and growth. My journey has been marked by a focus
             on application development, all the while exploring the endless
@@ -75,69 +87,57 @@ const HomePage = ({ articles }) => {
         </PageIntro>
       </Container>
       <PictureGallery pictures={PICTURES} />
-      <Container className="mt-24 md:mt-28">
-        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2">
-          <div className="flex flex-col lg:-mr-10">
-            <div className="flex items-start justify-between mb-8">
-              <h2 className="text-2xl font-bold tracking-tight text-zinc-900 sm:text-3xl">
-                Recent Writing
-              </h2>
-              <Link
-                href="/blogs"
-                className="flex items-center gap-2 text-sm font-medium text-zinc-600 transition-colors hover:text-teal-600"
-              >
-                View all posts
-                <ArrowRight size={16} aria-hidden="true" />
-              </Link>
-            </div>
-
-            <div className="flex flex-col gap-16">
-              {articles.slice(0, 3).map((article) => (
+      {building.length > 0 && (
+        <Container className="mt-20 md:mt-24">
+          <section aria-labelledby="building-heading">
+            <SectionHeading
+              id="building-heading"
+              action={
+                <Link href={ROUTES.PROJECTS} className={sectionLink}>
+                  All projects →
+                </Link>
+              }
+            >
+              What I&apos;m building
+            </SectionHeading>
+            {building.length === 1 ? (
+              <div className="mt-6">
+                <AppCard project={building[0]} />
+              </div>
+            ) : (
+              <div className="mt-6 grid gap-4 md:grid-cols-3">
+                {building.map((project) => (
+                  <AppCard key={project.name} project={project} compact />
+                ))}
+              </div>
+            )}
+          </section>
+        </Container>
+      )}
+      <Container className="mt-20 md:mt-24">
+        <div className="mx-auto grid max-w-6xl grid-cols-1 gap-y-20 lg:max-w-none lg:grid-cols-2 lg:gap-x-16">
+          <section aria-labelledby="writing-heading" className="flex flex-col">
+            <SectionHeading
+              id="writing-heading"
+              action={
+                <Link href={ROUTES.BLOGS} className={sectionLink}>
+                  All posts →
+                </Link>
+              }
+            >
+              Recent writing
+            </SectionHeading>
+            <div className="mt-10 flex flex-col gap-14">
+              {articles.map((article) => (
                 <ArticleCard key={article.id} article={article} />
               ))}
             </div>
-            {articles.length > 3 && (
-              <div className="flex justify-center mt-8">
-                <Link
-                  href="/blogs"
-                  className="rounded-full bg-zinc-100 px-6 py-3 text-sm font-medium text-zinc-900 transition hover:bg-zinc-200 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
-                >
-                  View All Posts
-                </Link>
-              </div>
-            )}
-          </div>
-          <div className="xl:pl-18 space-y-4 lg:-mr-10 lg:pl-16">
+          </section>
+          <div className="space-y-4 lg:-mr-10">
             <ResumeCard title="Work" resume={WORK_EXPERIENCE} />
             <ResumeCard title="Education" resume={EDUCATION_EXPERIENCE} />
           </div>
         </div>
-        <section className="mt-16 border-t border-zinc-100 pt-16">
-          <div className="grid gap-6 md:grid-cols-2">
-            <Link
-              href={ROUTES.PRODUCTS}
-              className="rounded-2xl border border-zinc-100 p-6 transition hover:border-zinc-200 hover:bg-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
-            >
-              <h3 className="mb-2 text-lg font-semibold text-zinc-900">
-                Products
-              </h3>
-              <p className="text-sm text-zinc-600">
-               Software I&apos;m building to solve problems I care about. From idea to production.
-              </p>
-            </Link>
-            <Link
-              href={ROUTES.PROJECTS}
-              className="rounded-2xl border border-zinc-100 p-6 transition hover:border-zinc-200 hover:bg-zinc-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-500"
-            >
-              <h3 className="mb-2 text-lg font-semibold text-zinc-900">
-                Projects
-              </h3>
-              <p className="text-sm text-zinc-600">
-                Side projects and technical experiments where I explore new ideas and technologies.
-              </p>
-            </Link>
-          </div>
-        </section>
       </Container>
     </>
   );
@@ -153,10 +153,10 @@ export async function getStaticProps() {
   const articles = posts
     .map(transformNotionArticleToPost)
     .sort((a, b) => b.posted_date.localeCompare(a.posted_date))
-    .slice(0, 4);
+    .slice(0, 3);
 
   return {
-    props: { articles },
+    props: { articles, building: getProjectSections().building },
     revalidate: 300,
   };
 }
