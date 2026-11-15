@@ -9,6 +9,8 @@ const nextConfig = {
   experimental: {
     scrollRestoration: true,
   },
+  // The Geist font package ships untranspiled ESM.
+  transpilePackages: ['geist'],
 }
 
 const withMDX = nextMDX({

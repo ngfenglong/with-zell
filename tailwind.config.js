@@ -1,7 +1,14 @@
+const defaultTheme = require('tailwindcss/defaultTheme');
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,jsx,ts,tsx,mdx}'],
   theme: {
+    extend: {
+      fontFamily: {
+        sans: ['var(--font-geist-sans)', ...defaultTheme.fontFamily.sans],
+      },
+    },
     fontSize: {
       xxxs: ['.625rem', { lineHeight: '1rem' }],
       xxs: ['.75rem', { lineHeight: '1.25rem' }],
@@ -48,10 +55,10 @@ module.exports = {
         css: {
           '--tw-prose-body': theme('colors.zinc.600'),
           '--tw-prose-headings': theme('colors.zinc.900'),
-          '--tw-prose-links': theme('colors.teal.500'),
-          '--tw-prose-links-hover': theme('colors.teal.600'),
-          '--tw-prose-underline': theme('colors.teal.500 / 0.2'),
-          '--tw-prose-underline-hover': theme('colors.teal.500'),
+          '--tw-prose-links': theme('colors.teal.700'),
+          '--tw-prose-links-hover': theme('colors.teal.800'),
+          '--tw-prose-underline': theme('colors.teal.700 / 0.3'),
+          '--tw-prose-underline-hover': theme('colors.teal.700'),
           '--tw-prose-bold': theme('colors.zinc.900'),
           '--tw-prose-counters': theme('colors.zinc.900'),
           '--tw-prose-bullets': theme('colors.zinc.900'),

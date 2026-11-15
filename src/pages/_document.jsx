@@ -10,7 +10,7 @@ export default function Document() {
         <link rel="apple-touch-icon" href="/images/displaypic-apple-touch-icon.png" />
         <meta name="theme-color" content="#ffffff" />
       </Head>
-      <body className="bg-white text-zinc-900 antialiased">
+      <body className="bg-[#fbfbfa] text-zinc-900 antialiased">
         <Main />
         <NextScript />
       </body>
