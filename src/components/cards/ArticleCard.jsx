@@ -22,7 +22,7 @@ export const ArticleCard = ({ article, withTimelineBar = false }) => {
           </div>
 
           <ArticleTimeline
-            dateTime={new Date()}
+            dateTime={article.posted_date}
             className={withTimelineBar ? 'md:hidden' : ''}
             decorate
           >
@@ -42,7 +42,7 @@ export const ArticleCard = ({ article, withTimelineBar = false }) => {
         </div>
         {withTimelineBar && (
           <ArticleTimeline
-            dateTime={new Date()}
+            dateTime={article.posted_date}
             className="mt-1 hidden md:block"
           >
             {formatDateToString(article.posted_date)}
@@ -64,7 +64,7 @@ export const ArticleCardWithTimeline = ({ article }) => {
               {article.title}
             </ArticleCardLink>
           </h2>
-          <ArticleTimeline dateTime={new Date()} className="md:hidden" decorate>
+          <ArticleTimeline dateTime={article.posted_date} className="md:hidden" decorate>
             {formatDateToString(article.posted_date)}
           </ArticleTimeline>
           {/* Description */}
@@ -79,7 +79,7 @@ export const ArticleCardWithTimeline = ({ article }) => {
             <ChevronRightIcon className="ml-1 h-4 w-4 stroke-current" />
           </div>
         </div>
-        <ArticleTimeline dateTime={new Date()} className="mt-1 hidden md:block">
+        <ArticleTimeline dateTime={article.posted_date} className="mt-1 hidden md:block">
           {formatDateToString(article.posted_date)}
         </ArticleTimeline>
       </article>

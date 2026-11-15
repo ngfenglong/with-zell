@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import Seo from '@/components/seo/Seo';
 import Container from '../../components/container/Container';
 import PageIntro from '../../components/page-intro/PageIntro';
 import ProjectCard from '../../components/cards/ProjectCard';
@@ -7,11 +7,12 @@ import { PROJECTS_DETAILS } from '../../constants/projects-details';
 const PROJECTS = PROJECTS_DETAILS;
 
 const ProjectsPage = () => {
-  useEffect(() => {
-    document.title = 'WithZell - My Development Projects';
-  }, []);
   return (
     <>
+      <Seo
+        title="Projects"
+        description="Side projects and technical experiments by Zell: Telegram bots, web apps, machine learning and Go tooling."
+      />
       <Container className="mt-16 sm:mt-32">
         <PageIntro
           title="Journey through My Development Projects"

@@ -1,6 +1,6 @@
 const Badge = ({ text, color, className }) => {
   let bgColor;
-  switch (color.toLowerCase()) {
+  switch ((color ?? 'default').toLowerCase()) {
     case 'orange':
       bgColor = 'bg-orange-200';
       break;
@@ -11,7 +11,7 @@ const Badge = ({ text, color, className }) => {
       bgColor = 'bg-amber-200';
       break;
     case 'gray':
-      bgColor = 'bg-gray-200';
+      bgColor = 'bg-zinc-200';
       break;
     case 'red':
       bgColor = 'bg-red-200';
@@ -43,9 +43,6 @@ const Badge = ({ text, color, className }) => {
     case 'cyan':
       bgColor = 'bg-cyan-200';
       break;
-    case 'lightBlue':
-      bgColor = 'bg-lightBlue-200';
-      break;
     case 'violet':
       bgColor = 'bg-violet-200';
       break;
@@ -56,12 +53,12 @@ const Badge = ({ text, color, className }) => {
       bgColor = 'bg-rose-200';
       break;
     default:
-      bgColor = 'bg-gray-50';
+      bgColor = 'bg-zinc-100';
   }
 
   return (
     <span
-      className={`inline-flex items-center rounded-md px-2 py-0.5 text-xxxs font-medium text-gray-600 ring-1 ring-inset ring-gray-500/10 ${bgColor}`}
+      className={`inline-flex items-center rounded-md px-2 py-0.5 text-xxxs font-medium text-zinc-700 ring-1 ring-inset ring-zinc-900/10 ${bgColor}`}
     >
       {text}
     </span>

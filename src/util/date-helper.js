@@ -7,7 +7,8 @@ export function formatStringDate(dateString) {
   });
 }
 
-export function formatDateToString(date, offset = 8) {
+export function formatDateToString(input, offset = 8) {
+  const date = input instanceof Date ? input : new Date(input);
   // set time zone offset for Singapore Standard Time (UTC+8)
   const utc = date.getTime() + date.getTimezoneOffset() * 60000;
   const formatDate = new Date(utc + 3600000 * offset);
